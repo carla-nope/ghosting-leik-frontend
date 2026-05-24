@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Sparkles, Wand2, RefreshCw, Copy, Check, ArrowRight,
-  Ghost, Heart, Moon, BookOpen, Star, Scroll
+  Ghost, Heart, Moon, BookOpen, Star, Scroll, Zap
 } from 'lucide-react';
 
 const StoryOraclePage: React.FC = () => {
@@ -11,20 +11,40 @@ const StoryOraclePage: React.FC = () => {
   const [generatedStory, setGeneratedStory] = useState<any>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [generationsLeft, setGenerationsLeft] = useState(3);
+  const [showLimitModal, setShowLimitModal] = useState(false);
+
+  // Demo: Simulate different membership levels (0 = free, 1 = seeker, 2 = adept, 3 = collector)
+  const [membershipLevel] = useState(0);
+
+  const getGenerationLimits = () => {
+    switch (membershipLevel) {
+      case 3: // Collector - unlimited
+        return { limit: Infinity, label: 'Unlimited', color: 'text-gold' };
+      case 2: // Adept - 20/month
+        return { limit: 20, label: '20/month', color: 'text-crimson' };
+      case 1: // Seeker - 5/month
+        return { limit: 5, label: '5/month', color: 'text-crimson' };
+      default: // Free - 3/month
+        return { limit: 3, label: '3/month', color: 'text-ink-muted' };
+    }
+  };
+
+  const limits = getGenerationLimits();
 
   const moods = [
-    { id: 'chilling', label: 'Chilling', description: 'Hair-raising terror' },
-    { id: 'mysterious', label: 'Mysterious', description: 'Puzzle and intrigue' },
-    { id: 'bittersweet', label: 'Bittersweet', description: 'Sad beauty' },
-    { id: 'whimsical', label: 'Whimsical', description: 'Playful magic' },
-    { id: 'romantic', label: 'Romantic', description: 'Love and longing' },
+    { id: 'chilling', label: 'Chilling', description: 'Hair-raising terror', icon: <Moon className="w-6 h-6" /> },
+    { id: 'mysterious', label: 'Mysterious', description: 'Puzzle and intrigue', icon: <Sparkles className="w-6 h-6" /> },
+    { id: 'bittersweet', label: 'Bittersweet', description: 'Sad beauty', icon: <Heart className="w-6 h-6" /> },
+    { id: 'whimsical', label: 'Whimsical', description: 'Playful magic', icon: <Star className="w-6 h-6" /> },
+    { id: 'romantic', label: 'Romantic', description: 'Love and longing', icon: <Ghost className="w-6 h-6" /> },
   ];
 
   const genres = [
-    { id: 'kaidan', label: 'Kaidan', description: 'Classic ghost stories' },
-    { id: 'yokai', label: 'Yōkai', description: 'Supernatural creatures' },
-    { id: 'urban', label: 'Urban Legend', description: 'Modern horror' },
-    { id: 'folklore', label: 'Folklore', description: 'Traditional tales' },
+    { id: 'kaidan', label: 'Kaidan', description: 'Classic ghost stories', icon: <Scroll className="w-5 h-5" /> },
+    { id: 'yokai', label: 'Yōkai', description: 'Supernatural creatures', icon: <BookOpen className="w-5 h-5" /> },
+    { id: 'urban', label: 'Urban Legend', description: 'Modern horror', icon: <Zap className="w-5 h-5" /> },
+    { id: 'folklore', label: 'Folklore', description: 'Traditional tales', icon: <Star className="w-5 h-5" /> },
   ];
 
   const sampleStories = [
@@ -95,6 +115,12 @@ const StoryOraclePage: React.FC = () => {
   ];
 
   const generateStory = () => {
+    // Check if user has generations left
+    if (generationsLeft <= 0 && limits.limit !== Infinity) {
+      setShowLimitModal(true);
+      return;
+    }
+
     setIsGenerating(true);
 
     setTimeout(() => {
@@ -104,6 +130,10 @@ const StoryOraclePage: React.FC = () => {
         : sampleStories[Math.floor(Math.random() * sampleStories.length)];
       setGeneratedStory(story);
       setIsGenerating(false);
+      // Decrement generations left
+      if (limits.limit !== Infinity) {
+        setGenerationsLeft(prev => prev - 1);
+      }
     }, 2000);
   };
 
@@ -151,6 +181,19 @@ ${generatedStory.ending}
           </p>
         </div>
 
+        {/* Generations Counter */}
+        <div className="mb-6 flex items-center justify-center gap-2">
+          <div className={`px-4 py-2 rounded-full border ${limits.limit === Infinity ? 'bg-gold/10 border-gold/30' : 'bg-parchment-alt border-ink-subtle'}`}>
+            <span className={`text-sm font-medium ${limits.color}`}>
+              {limits.limit === Infinity ? (
+                <><Zap className="w-4 h-4 inline mr-1" />Unlimited generations</>
+              ) : (
+                <><Sparkles className="w-4 h-4 inline mr-1" />{generationsLeft} of {limits.limit} generations remaining</>
+              )}
+            </span>
+          </div>
+        </div>
+
         {/* Generator Form */}
         <div className="card-archive p-8 mb-8">
           <h2 className="text-xl font-display font-bold mb-6 text-center text-ink-base">What story do you seek?</h2>
@@ -163,13 +206,26 @@ ${generatedStory.ending}
                 <button
                   key={m.id}
                   onClick={() => setMood(m.id)}
-                  className={`p-4 rounded-lg border transition-all font-serif ${
+                  className={`relative p-4 rounded-lg border-2 transition-all font-serif text-center ${
                     mood === m.id
-                      ? 'bg-crimson/10 border-crimson text-ink-base'
-                      : 'bg-parchment-alt border-ink-subtle text-ink-muted hover:border-crimson/30'
+                      ? 'bg-crimson/10 border-crimson shadow-lg shadow-crimson/20'
+                      : 'bg-parchment-alt border-ink-subtle text-ink-muted hover:border-crimson/30 hover:bg-parchment'
                   }`}
                 >
-                  <div className="font-medium text-sm mb-1">{m.label}</div>
+                  {/* Selection indicator */}
+                  <div className={`absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center transition-all ${
+                    mood === m.id
+                      ? 'bg-crimson text-parchment scale-100 opacity-100'
+                      : 'bg-ink-subtle text-parchment scale-75 opacity-0'
+                  }`}>
+                    <Check className="w-4 h-4" />
+                  </div>
+                  <div className={`mb-2 flex justify-center ${mood === m.id ? 'text-crimson' : 'text-ink-muted'}`}>
+                    {m.icon}
+                  </div>
+                  <div className={`font-medium text-sm mb-1 ${mood === m.id ? 'text-ink-base' : ''}`}>
+                    {m.label}
+                  </div>
                   <div className="text-xs text-ink-muted">{m.description}</div>
                 </button>
               ))}
@@ -184,13 +240,26 @@ ${generatedStory.ending}
                 <button
                   key={g.id}
                   onClick={() => setGenre(g.id)}
-                  className={`p-4 rounded-lg border transition-all font-serif ${
+                  className={`relative p-4 rounded-lg border-2 transition-all font-serif text-center ${
                     genre === g.id
-                      ? 'bg-crimson/10 border-crimson text-ink-base'
-                      : 'bg-parchment-alt border-ink-subtle text-ink-muted hover:border-crimson/30'
+                      ? 'bg-crimson/10 border-crimson shadow-lg shadow-crimson/20'
+                      : 'bg-parchment-alt border-ink-subtle text-ink-muted hover:border-crimson/30 hover:bg-parchment'
                   }`}
                 >
-                  <div className="font-medium text-sm">{g.label}</div>
+                  {/* Selection indicator */}
+                  <div className={`absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center transition-all ${
+                    genre === g.id
+                      ? 'bg-crimson text-parchment scale-100 opacity-100'
+                      : 'bg-ink-subtle text-parchment scale-75 opacity-0'
+                  }`}>
+                    <Check className="w-4 h-4" />
+                  </div>
+                  <div className={`mb-2 flex justify-center ${genre === g.id ? 'text-crimson' : 'text-ink-muted'}`}>
+                    {g.icon}
+                  </div>
+                  <div className={`font-medium text-sm ${genre === g.id ? 'text-ink-base' : ''}`}>
+                    {g.label}
+                  </div>
                   <div className="text-xs text-ink-muted mt-1">{g.description}</div>
                 </button>
               ))}
@@ -282,10 +351,17 @@ ${generatedStory.ending}
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <button
-                onClick={generateStory}
-                className="flex-1 flex items-center justify-center gap-2 py-3 bg-parchment-alt border border-ink-subtle rounded-lg hover:bg-parchment transition-all font-medium"
+                onClick={() => {
+                  if (generationsLeft <= 0 && limits.limit !== Infinity) {
+                    setShowLimitModal(true);
+                  } else {
+                    generateStory();
+                  }
+                }}
+                disabled={isGenerating}
+                className="flex-1 flex items-center justify-center gap-2 py-3 bg-parchment-alt border border-ink-subtle rounded-lg hover:bg-parchment transition-all font-medium disabled:opacity-50"
               >
-                <RefreshCw className="w-4 h-4" />
+                <RefreshCw className={`w-4 h-4 ${isGenerating ? 'animate-spin' : ''}`} />
                 Generate Another
               </button>
               <Link
@@ -317,6 +393,36 @@ ${generatedStory.ending}
             </div>
           </div>
         </div>
+
+        {/* Generation Limit Modal */}
+        {showLimitModal && (
+          <div className="fixed inset-0 bg-ink-base/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="card-archive p-8 max-w-md w-full text-center">
+              <div className="w-16 h-16 bg-crimson/10 border border-crimson/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Sparkles className="w-8 h-8 text-crimson" />
+              </div>
+              <h3 className="text-2xl font-display font-bold mb-2 text-ink-base">Generations Exhausted</h3>
+              <p className="text-ink-muted font-serif mb-6">
+                You've used all your free Story Oracle generations for this period. Upgrade to unlock unlimited story generation.
+              </p>
+              <div className="flex flex-col gap-3">
+                <Link
+                  to="/pricing"
+                  className="w-full py-3 btn-primary flex items-center justify-center gap-2"
+                >
+                  <Zap className="w-5 h-5" />
+                  Unlock Unlimited Access
+                </Link>
+                <button
+                  onClick={() => setShowLimitModal(false)}
+                  className="w-full py-3 bg-parchment-alt border border-ink-subtle rounded-lg hover:bg-parchment transition-all font-medium text-ink-muted"
+                >
+                  Maybe Later
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
