@@ -1,38 +1,406 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%
+    /* GhostingLeik - Japanese Supernatural Archive Design System */
+
+    /* Primary Palette - Ink & Night */
+    --ink-black: #0a0a0a;
+    --ink-deep: #141414;
+    --ink-dark: #1a1a1f;
+    --ink-surface: #212127;
+
+    /* Secondary Palette - Indigo Night */
+    --indigo-deep: #0d1030;
+    --indigo-dark: #151830;
+    --indigo-mid: #1e2240;
+
+    /* Accent Palette - Supernatural */
+    --crimson-dark: #8b2942;
+    --crimson: #a83248;
+    --crimson-light: #c94460;
+
+    --gold-faded: #b8985a;
+    --gold-antique: #c9a85c;
+    --gold-bright: #dbb96a;
+
+    /* Neutral Palette - Parchment & Bone */
+    --parchment: #f5f0e6;
+    --parchment-warm: #efe8d8;
+    --parchment-aged: #e6ddc8;
+    --bone-white: #faf8f4;
+    --bone-gray: #e8e4dc;
+
+    /* Text Colors */
+    --text-primary: #f5f0e6;
+    --text-secondary: #a8a095;
+    --text-muted: #6b6760;
+    --text-dark: #2a2520;
+
+    /* Utility Colors */
+    --smoke: #3a3a42;
+    --smoke-light: #5a5a65;
+
+    /* Borders & Dividers */
+    --border-subtle: rgba(184, 152, 90, 0.15);
+    --border-medium: rgba(184, 152, 90, 0.25);
+    --border-strong: rgba(184, 152, 90, 0.4);
+
+    /* Shadows */
+    --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.5);
   }
 
-  .dark {
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--ink-deep);
+    color: var(--text-primary);
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+  }
+
+  /* Typography System */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
+  .font-display {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+
+  .font-body {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .font-literary {
+    font-family: 'EB Garamond', 'Crimson Text', Georgia, serif;
+  }
+
+  .font-story {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-style: italic;
   }
 }
 
+@layer components {
+  /* Container Styles */
+  .container-archive {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
 
+  .container-narrow {
+    @apply max-w-4xl mx-auto px-4 sm:px-6;
+  }
 
-img {
-  object-position: top;
+  /* Paper/Parchment Backgrounds */
+  .bg-parchment {
+    background-color: var(--parchment);
+    color: var(--text-dark);
+  }
+
+  .bg-ink {
+    background-color: var(--ink-deep);
+  }
+
+  .bg-indigo {
+    background-color: var(--indigo-deep);
+  }
+
+  /* Textured Backgrounds */
+  .bg-texture-paper {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-blend-mode: overlay;
+  }
+
+  .bg-texture-ink {
+    background-image:
+      radial-gradient(ellipse at 20% 30%, rgba(13, 16, 48, 0.8) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(21, 24, 48, 0.6) 0%, transparent 50%);
+  }
+
+  /* Divider Styles */
+  .divider-ink {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-medium), transparent);
+  }
+
+  .divider-flourish {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .divider-flourish::before,
+  .divider-flourish::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-subtle);
+  }
+
+  .divider-flourish-icon {
+    color: var(--gold-faded);
+    font-size: 0.75rem;
+  }
+
+  /* Button Styles - Archive/Seal Style */
+  .btn-archive {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-medium tracking-wide transition-all duration-300;
+    background-color: transparent;
+    border: 1px solid var(--border-medium);
+    color: var(--text-primary);
+  }
+
+  .btn-archive:hover {
+    border-color: var(--gold-antique);
+    color: var(--gold-bright);
+    background-color: rgba(184, 152, 90, 0.08);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 font-medium tracking-wide transition-all duration-300;
+    background-color: var(--crimson);
+    border: 1px solid var(--crimson-dark);
+    color: var(--bone-white);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--crimson-light);
+    border-color: var(--crimson);
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-medium tracking-wide transition-all duration-300;
+    background-color: transparent;
+    border: 1px solid var(--gold-antique);
+    color: var(--gold-bright);
+  }
+
+  .btn-gold:hover {
+    background-color: rgba(184, 152, 90, 0.15);
+    border-color: var(--gold-bright);
+  }
+
+  .btn-seal {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2 text-sm font-medium tracking-wider uppercase;
+    background-color: var(--crimson);
+    color: var(--bone-white);
+    position: relative;
+  }
+
+  .btn-seal::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-seal:hover {
+    background-color: var(--crimson-light);
+  }
+
+  /* Card Styles - Archive Entry */
+  .card-archive {
+    background-color: var(--ink-surface);
+    border: 1px solid var(--border-subtle);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .card-archive:hover {
+    border-color: var(--border-medium);
+    box-shadow: var(--shadow-medium);
+  }
+
+  .card-parchment {
+    background-color: var(--parchment);
+    border: 1px solid var(--parchment-aged);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    color: var(--text-dark);
+  }
+
+  .card-parchment:hover {
+    border-color: var(--gold-faded);
+  }
+
+  /* Label/Tag Styles */
+  .label-ink {
+    @apply inline-block px-3 py-1 text-xs font-medium tracking-wider uppercase;
+    background-color: var(--ink-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .label-crimson {
+    @apply inline-block px-3 py-1 text-xs font-medium tracking-wider uppercase;
+    background-color: rgba(168, 50, 72, 0.15);
+    color: var(--crimson-light);
+    border: 1px solid rgba(168, 50, 72, 0.3);
+  }
+
+  .label-gold {
+    @apply inline-block px-3 py-1 text-xs font-medium tracking-wider uppercase;
+    background-color: rgba(184, 152, 90, 0.1);
+    color: var(--gold-antique);
+    border: 1px solid rgba(184, 152, 90, 0.3);
+  }
+
+  /* Navigation Styles */
+  .nav-link {
+    @apply px-4 py-2 text-sm font-medium tracking-wide transition-colors duration-200;
+    color: var(--text-secondary);
+  }
+
+  .nav-link:hover {
+    color: var(--text-primary);
+  }
+
+  .nav-link-active {
+    color: var(--gold-antique);
+    border-bottom: 1px solid var(--gold-antique);
+  }
+
+  /* Section Labels */
+  .section-label {
+    @apply text-xs font-medium tracking-[0.2em] uppercase mb-4;
+    color: var(--gold-faded);
+  }
+
+  /* Story Excerpt Style */
+  .excerpt-text {
+    @apply text-base leading-relaxed;
+    font-family: 'Crimson Text', Georgia, serif;
+    color: var(--text-secondary);
+  }
+
+  /* Pull Quote Style */
+  .pull-quote {
+    @apply text-xl md:text-2xl italic leading-relaxed;
+    font-family: 'EB Garamond', Georgia, serif;
+    color: var(--gold-antique);
+    border-left: 2px solid var(--gold-faded);
+    padding-left: 1.5rem;
+  }
+
+  /* Form Styles */
+  .input-archive {
+    @apply w-full px-4 py-3 bg-transparent border border-[var(--border-medium)] text-[var(--text-primary)] placeholder-[var(--text-muted)] transition-all duration-200;
+  }
+
+  .input-archive:focus {
+    outline: none;
+    border-color: var(--gold-antique);
+    box-shadow: 0 0 0 2px rgba(184, 152, 90, 0.1);
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--ink-deep);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--smoke);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--smoke-light);
+  }
 }
 
-.fixed {
-  position: fixed;
+@layer utilities {
+  /* Fade Animations */
+  .fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Text Gradient - Subtle */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, var(--gold-antique) 0%, var(--gold-bright) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Letter Spacing Utilities */
+  .tracking-ink {
+    letter-spacing: 0.15em;
+  }
+
+  .tracking-wide-custom {
+    letter-spacing: 0.1em;
+  }
+
+  /* Opacity Utilities for Overlays */
+  .overlay-subtle {
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0.6) 0%, rgba(10, 10, 10, 0.9) 100%);
+  }
+
+  /* Responsive Typography Scale */
+  .text-hero {
+    @apply text-4xl md:text-5xl lg:text-6xl xl:text-7xl;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    line-height: 1.1;
+  }
+
+  .text-display {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    line-height: 1.15;
+  }
+
+  .text-heading {
+    @apply text-2xl md:text-3xl;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    line-height: 1.2;
+  }
+
+  .text-subheading {
+    @apply text-xl md:text-2xl;
+    font-family: 'EB Garamond', Georgia, serif;
+    line-height: 1.3;
+  }
 }

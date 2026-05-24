@@ -1,27 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Ghost, Search, Filter, Clock, Heart, ArrowRight,
-  Bookmark, Share2, ChevronRight, Star
+  Search, Filter, ArrowRight, Clock, Star, Eye,
+  Bookmark, Share2, ChevronRight, Ghost, BookOpen, Scroll
 } from 'lucide-react';
 
 const StoriesPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedEra, setSelectedEra] = useState('all');
+  const [selectedMood, setSelectedMood] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
+  // Story categories based on GhostingLeik research
   const categories = [
     { id: 'all', label: 'All Stories' },
-    { id: 'classic', label: 'Classic Kaidan' },
+    { id: 'kaidan', label: 'Kaidan (Classic)' },
     { id: 'yokai', label: 'Yōkai Tales' },
-    { id: 'modern', label: 'Modern Horror' },
+    { id: 'yurei', label: 'Yūrei Stories' },
+    { id: 'urban', label: 'Urban Legends' },
     { id: 'folklore', label: 'Folklore' },
   ];
 
+  // Era/Period filters
+  const eras = [
+    { id: 'all', label: 'All Periods' },
+    { id: 'heian', label: 'Heian Period' },
+    { id: 'edo', label: 'Edo Period' },
+    { id: 'meiji', label: 'Meiji Era' },
+    { id: 'modern', label: 'Modern' },
+  ];
+
+  // Mood filters
+  const moods = [
+    { id: 'all', label: 'All Moods' },
+    { id: 'chilling', label: 'Chilling' },
+    { id: 'mysterious', label: 'Mysterious' },
+    { id: 'bittersweet', label: 'Bittersweet' },
+    { id: 'whimsical', label: 'Whimsical' },
+    { id: 'romantic', label: 'Romantic' },
+  ];
+
+  // Stories database
   const stories = [
     {
       title: 'The Tale of Oiwa',
       excerpt: 'One of the most famous ghosts in Japanese theater, the betrayed wife whose vengeance knows no bounds. A story of love, betrayal, and eternal retribution.',
-      category: 'Classic',
+      category: 'yurei',
+      era: 'edo',
+      mood: 'chilling',
       readTime: '8 min',
       rating: 4.9,
       views: '12.5K',
@@ -31,7 +57,9 @@ const StoriesPage: React.FC = () => {
     {
       title: 'Kappa of the Gifu River',
       excerpt: 'A curious water demon who loves nothing more than perfecting its cucumber-based recipes. Surprisingly wholesome for a creature of the deep.',
-      category: 'Yōkai',
+      category: 'yokai',
+      era: 'regional',
+      mood: 'whimsical',
       readTime: '5 min',
       rating: 4.7,
       views: '8.3K',
@@ -40,8 +68,10 @@ const StoriesPage: React.FC = () => {
     },
     {
       title: 'The Suicide Forest',
-      excerpt: 'Aokigahara\'s dark reputation and the legends that explain why people journey there. A exploration of one of the world\'s most mysterious forests.',
-      category: 'Modern',
+      excerpt: 'Aokigahara\'s dark reputation and the legends that explain why people journey there. An exploration of one of the world\'s most mysterious forests.',
+      category: 'kaidan',
+      era: 'modern',
+      mood: 'chilling',
       readTime: '12 min',
       rating: 4.8,
       views: '15.2K',
@@ -51,7 +81,9 @@ const StoriesPage: React.FC = () => {
     {
       title: 'The Birthday Phenomenon',
       excerpt: 'Why do so many famous Japanese horror events occur on birthdays? A chilling analysis of dates, coincidences, and the supernatural.',
-      category: 'Modern',
+      category: 'kaidan',
+      era: 'modern',
+      mood: 'mysterious',
       readTime: '7 min',
       rating: 4.6,
       views: '9.8K',
@@ -60,8 +92,10 @@ const StoriesPage: React.FC = () => {
     },
     {
       title: 'Tengu of Mount Kurama',
-      excerpt: 'The long-nosed mountain goblins who serve as guardians of ancient wisdom. Warriors, monks, and the supernatural.',
-      category: 'Yōkai',
+      excerpt: 'The long-nosed mountain goblins who serve as guardians of ancient wisdom. Warriors, monks, and the supernatural intersect.',
+      category: 'yokai',
+      era: 'edo',
+      mood: 'mysterious',
       readTime: '6 min',
       rating: 4.8,
       views: '7.1K',
@@ -71,7 +105,9 @@ const StoriesPage: React.FC = () => {
     {
       title: 'The Red Room',
       excerpt: 'A modern urban legend about a hidden room in traditional ryokan that only appears to certain guests. What waits inside?',
-      category: 'Modern',
+      category: 'urban',
+      era: 'modern',
+      mood: 'chilling',
       readTime: '9 min',
       rating: 4.9,
       views: '11.3K',
@@ -79,19 +115,23 @@ const StoriesPage: React.FC = () => {
       slug: 'red-room'
     },
     {
-      title: 'The Tale of Genji',
-      excerpt: 'Not the classic novel, but the ghost story behind one of the most famous works of Japanese literature. Haunted poets and vengeful spirits.',
-      category: 'Classic',
+      title: 'The Lantern of Lost Souls',
+      excerpt: 'A wandering spirit who collects abandoned paper lanterns discovers one that belonged to a poet who died 200 years ago. Through the lantern\'s glow, they witness the poet\'s unfinished love letter.',
+      category: 'kaidan',
+      era: 'folklore',
+      mood: 'bittersweet',
       readTime: '10 min',
-      rating: 4.7,
-      views: '6.4K',
-      featured: false,
-      slug: 'tale-of-genji'
+      rating: 4.9,
+      views: '13.1K',
+      featured: true,
+      slug: 'lantern-of-lost-souls'
     },
     {
       title: 'Baku - The Dream Eater',
       excerpt: 'These strange creatures consume nightmares and bring sweet dreams. A look at one of the friendliest yokai in Japanese folklore.',
-      category: 'Yōkai',
+      category: 'yokai',
+      era: 'heian',
+      mood: 'whimsical',
       readTime: '4 min',
       rating: 4.5,
       views: '5.9K',
@@ -102,94 +142,165 @@ const StoriesPage: React.FC = () => {
 
   const featuredStories = stories.filter(s => s.featured);
 
+  // Filter stories
+  const filteredStories = useMemo(() => {
+    return stories.filter(story => {
+      if (selectedCategory !== 'all' && story.category !== selectedCategory) return false;
+      if (selectedEra !== 'all' && story.era !== selectedEra) return false;
+      if (selectedMood !== 'all' && story.mood !== selectedMood) return false;
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        return (
+          story.title.toLowerCase().includes(query) ||
+          story.excerpt.toLowerCase().includes(query)
+        );
+      }
+      return true;
+    });
+  }, [selectedCategory, selectedEra, selectedMood, searchQuery]);
+
+  const getCategoryLabel = (cat: string) => {
+    const found = categories.find(c => c.id === cat);
+    return found ? found.label : cat;
+  };
+
   return (
     <div className="min-h-screen py-12">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
-              Ghost Stories
-            </span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-crimson/10 border border-crimson/30 rounded-full mb-6">
+            <Scroll className="w-4 h-4 text-crimson" />
+            <span className="text-sm text-crimson font-medium">Curated Kaidan Collection</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 text-ink-base">
+            Ghost Stories
           </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-ink-muted max-w-2xl mx-auto leading-relaxed">
             Explore the mysterious world of Japanese kaidan (怪談) - ghost stories that have chilled audiences for centuries.
           </p>
         </div>
 
-        {/* Search & Filter */}
-        <div className="max-w-4xl mx-auto mb-12">
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search stories..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500/50"
-              />
+        {/* Search & Filters */}
+        <div className="max-w-5xl mx-auto mb-12">
+          {/* Search Bar */}
+          <div className="relative mb-6">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-muted" />
+            <input
+              type="text"
+              placeholder="Search stories by title or theme..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-12 pr-4 py-4 bg-parchment border border-ink-subtle rounded-lg text-ink-base placeholder-ink-muted focus:outline-none focus:border-crimson/50 font-serif"
+            />
+          </div>
+
+          {/* Filter Row */}
+          <div className="flex flex-col lg:flex-row gap-4 mb-4">
+            <div className="flex-1">
+              <label className="block text-sm font-medium text-ink-base mb-2">Category</label>
+              <div className="flex gap-2 flex-wrap">
+                {categories.map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={`px-3 py-2 rounded text-sm font-medium transition-all ${
+                      selectedCategory === cat.id
+                        ? 'bg-crimson text-bone-white'
+                        : 'bg-parchment text-ink-muted hover:bg-crimson/10 hover:text-crimson border border-ink-subtle'
+                    }`}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="flex gap-2 flex-wrap">
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                    selectedCategory === cat.id
-                      ? 'bg-purple-500 text-white'
-                      : 'bg-white/5 text-gray-400 hover:bg-white/10'
-                  }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
+          </div>
+
+          {/* Second Row */}
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex-1">
+              <label className="block text-sm font-medium text-ink-base mb-2">Era/Period</label>
+              <select
+                value={selectedEra}
+                onChange={(e) => setSelectedEra(e.target.value)}
+                className="w-full px-4 py-3 bg-parchment border border-ink-subtle rounded-lg text-ink-base focus:outline-none focus:border-crimson/50 font-serif"
+              >
+                {eras.map((era) => (
+                  <option key={era.id} value={era.id}>{era.label}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="flex-1">
+              <label className="block text-sm font-medium text-ink-base mb-2">Mood</label>
+              <select
+                value={selectedMood}
+                onChange={(e) => setSelectedMood(e.target.value)}
+                className="w-full px-4 py-3 bg-parchment border border-ink-subtle rounded-lg text-ink-base focus:outline-none focus:border-crimson/50 font-serif"
+              >
+                {moods.map((mood) => (
+                  <option key={mood.id} value={mood.id}>{mood.label}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="flex items-end pb-1">
+              <span className="text-ink-muted font-serif">
+                Showing {filteredStories.length} of {stories.length} stories
+              </span>
             </div>
           </div>
         </div>
 
         {/* Featured Stories */}
         <div className="mb-16">
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            <Star className="w-5 h-5 text-yellow-400" />
+          <h2 className="text-2xl font-display font-bold mb-6 flex items-center gap-2 text-ink-base">
+            <Star className="w-5 h-5 text-gold" />
             Featured Stories
           </h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredStories.map((story, index) => (
               <Link
                 key={index}
                 to={`/stories/${story.slug}`}
-                className="group bg-gradient-to-br from-purple-900/50 to-pink-900/50 border border-purple-500/20 rounded-2xl overflow-hidden hover:border-purple-500/40 transition-all"
+                className="group card-archive hover:border-crimson/40 transition-all overflow-hidden"
               >
-                <div className="h-48 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-600/30 to-pink-600/30"></div>
-                  <Ghost className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 text-white/10" />
-                  <div className="absolute top-4 left-4 px-3 py-1 bg-yellow-500/20 text-yellow-400 text-xs rounded-full font-semibold">
+                {/* Decorative Header */}
+                <div className="h-32 bg-gradient-to-br from-crimson/5 to-gold/5 flex items-center justify-center relative">
+                  <Ghost className="w-16 h-16 text-crimson/10 group-hover:text-crimson/20 transition-colors" />
+                  <div className="absolute top-4 left-4 px-3 py-1 bg-gold/20 border border-gold/30 text-gold-dark text-xs rounded-full font-semibold">
                     Featured
                   </div>
                 </div>
+
                 <div className="p-6">
+                  {/* Meta */}
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="px-2 py-1 bg-purple-500/20 text-purple-400 text-xs rounded-full">
-                      {story.category}
+                    <span className="px-2 py-1 bg-crimson/10 border border-crimson/20 text-crimson text-xs rounded">
+                      {getCategoryLabel(story.category)}
                     </span>
-                    <span className="flex items-center gap-1 text-xs text-gray-400">
+                    <span className="flex items-center gap-1 text-xs text-ink-muted">
                       <Clock className="w-3 h-3" />
                       {story.readTime}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-purple-400 transition-colors">
+
+                  <h3 className="text-xl font-display font-bold mb-2 text-ink-base group-hover:text-crimson transition-colors">
                     {story.title}
                   </h3>
-                  <p className="text-sm text-gray-400 leading-relaxed mb-4">
+
+                  <p className="text-sm text-ink-muted leading-relaxed mb-4 line-clamp-3">
                     {story.excerpt}
                   </p>
-                  <div className="flex items-center justify-between">
+
+                  {/* Footer */}
+                  <div className="flex items-center justify-between pt-4 border-t border-ink-subtle">
                     <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                      <span className="text-sm text-gray-300">{story.rating}</span>
+                      <Star className="w-4 h-4 text-gold fill-gold" />
+                      <span className="text-sm text-ink-base font-medium">{story.rating}</span>
                     </div>
-                    <span className="text-xs text-gray-500">{story.views} views</span>
+                    <span className="text-xs text-ink-muted">{story.views} views</span>
                   </div>
                 </div>
               </Link>
@@ -199,33 +310,35 @@ const StoriesPage: React.FC = () => {
 
         {/* All Stories */}
         <div>
-          <h2 className="text-2xl font-bold mb-6">All Stories</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {stories.map((story, index) => (
+          <h2 className="text-2xl font-display font-bold mb-6 text-ink-base">All Stories</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredStories.map((story, index) => (
               <Link
                 key={index}
                 to={`/stories/${story.slug}`}
-                className="group bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-purple-500/30 transition-all"
+                className="group card-archive hover:border-crimson/30 transition-all"
               >
-                <div className="h-32 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
-                  <Ghost className="w-12 h-12 text-white/10 group-hover:text-purple-400/20 transition-colors" />
-                </div>
-                <div className="p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="px-2 py-0.5 bg-purple-500/20 text-purple-400 text-xs rounded-full">
-                      {story.category}
+                <div className="p-6">
+                  {/* Meta */}
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="px-2 py-0.5 bg-crimson/10 border border-crimson/20 text-crimson text-xs rounded">
+                      {getCategoryLabel(story.category)}
                     </span>
-                    <span className="text-xs text-gray-500">{story.readTime}</span>
+                    <span className="text-xs text-ink-muted">{story.readTime}</span>
                   </div>
-                  <h3 className="font-bold mb-2 group-hover:text-purple-400 transition-colors line-clamp-1">
+
+                  <h3 className="font-display font-bold mb-2 text-ink-base group-hover:text-crimson transition-colors line-clamp-1">
                     {story.title}
                   </h3>
-                  <p className="text-xs text-gray-400 line-clamp-2 mb-3">
+
+                  <p className="text-xs text-ink-muted line-clamp-2 mb-4">
                     {story.excerpt}
                   </p>
-                  <div className="flex items-center justify-between text-xs text-gray-500">
+
+                  {/* Footer */}
+                  <div className="flex items-center justify-between text-xs text-ink-muted pt-3 border-t border-ink-subtle">
                     <div className="flex items-center gap-1">
-                      <Star className="w-3 h-3 text-yellow-400 fill-yellow-400" />
+                      <Star className="w-3 h-3 text-gold fill-gold" />
                       {story.rating}
                     </div>
                     <span>{story.views}</span>
@@ -237,20 +350,21 @@ const StoriesPage: React.FC = () => {
         </div>
 
         {/* Newsletter CTA */}
-        <div className="mt-16 max-w-3xl mx-auto text-center bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/20 rounded-2xl p-8">
-          <h3 className="text-2xl font-bold mb-4">Never Miss a New Story</h3>
-          <p className="text-gray-400 mb-6">
+        <div className="mt-16 max-w-3xl mx-auto text-center card-parchment p-8">
+          <BookOpen className="w-10 h-10 text-gold mx-auto mb-4" />
+          <h3 className="text-2xl font-display font-bold text-ink-base mb-4">Never Miss a New Story</h3>
+          <p className="text-ink-muted mb-6 leading-relaxed">
             Get weekly Japanese ghost stories delivered to your inbox. Curated content you won't find anywhere else.
           </p>
           <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input
               type="email"
               placeholder="your@email.com"
-              className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-purple-500/50"
+              className="flex-1 px-4 py-3 bg-parchment-alt border border-ink-subtle rounded-lg focus:outline-none focus:border-crimson/50 font-serif"
             />
             <button
               type="submit"
-              className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl font-semibold hover:from-purple-600 hover:to-pink-600 transition-all"
+              className="btn-primary"
             >
               Subscribe
             </button>

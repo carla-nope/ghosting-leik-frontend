@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Sparkles, ArrowRight, Check, Clock, Zap,
-  Heart, Star, ChevronRight, RotateCcw
+  Heart, Star, ChevronRight, RotateCcw, BookOpen, Scroll
 } from 'lucide-react';
 
 const QuizPage: React.FC = () => {
@@ -72,7 +72,6 @@ const QuizPage: React.FC = () => {
     calm: {
       name: "Kitsune",
       japanese: "狐",
-      emoji: "🦊",
       description: "You embody the cunning intelligence of the Kitsune - a fox spirit known for wisdom, adaptability, and the ability to see through deception. Like the Kitsune, you navigate life with grace and wit.",
       traits: ["Clever", "Adaptable", "Wise", "Observant"],
       compatibility: "Best paired with: Books on Japanese history, tea ceremonies, moonlit walks"
@@ -80,7 +79,6 @@ const QuizPage: React.FC = () => {
     balanced: {
       name: "Kappa",
       japanese: "河童",
-      emoji: "🐸",
       description: "Your practical nature and love of routine reflects the Kappa - a water spirit known for its disciplined sumo wrestling and cucumber culinary arts. You find joy in the simple pleasures of life.",
       traits: ["Practical", "Disciplined", "Friendly", "Playful"],
       compatibility: "Best paired with: River festivals, cooking classes, sumo wrestling events"
@@ -88,7 +86,6 @@ const QuizPage: React.FC = () => {
     creative: {
       name: "Tanuki",
       japanese: "狸",
-      emoji: "🦝",
       description: "Your creative spirit mirrors the mischievous Tanuki - a raccoon dog famous for its shapeshifting abilities and playful nature. You're a natural entertainer who brings joy wherever you go.",
       traits: ["Creative", "Mischievous", "Charismatic", "Fun-loving"],
       compatibility: "Best paired with: Comedy shows, art workshops, festival celebrations"
@@ -96,7 +93,6 @@ const QuizPage: React.FC = () => {
     scholar: {
       name: "Tengu",
       japanese: "天狗",
-      emoji: "🧔",
       description: "Your thirst for knowledge aligns with the Tengu - mountain-dwelling spirits who guard ancient wisdom. You seek truth and are not afraid to venture into the unknown to find answers.",
       traits: ["Scholarly", "Ambitious", "Disciplined", "Mysterious"],
       compatibility: "Best paired with: Mountain hiking, meditation retreats, ancient texts"
@@ -104,7 +100,6 @@ const QuizPage: React.FC = () => {
     protective: {
       name: "Baku",
       japanese: "獏",
-      emoji: "🐘",
       description: "Your nurturing nature embodies the Baku - a dream-eating creature that protects people from nightmares. You have a gentle spirit that brings comfort and peace to those around you.",
       traits: ["Nurturing", "Protective", "Gentle", "Compassionate"],
       compatibility: "Best paired with: Sleep wellness, dream journals, cozy reading nooks"
@@ -112,7 +107,6 @@ const QuizPage: React.FC = () => {
     mysterious: {
       name: "Yūrei",
       japanese: "幽霊",
-      emoji: "👻",
       description: "Your mysterious aura reflects the Yūrei - restless spirits who exist between worlds. You're deeply intuitive and sensitive to things others cannot perceive, walking the line between light and shadow.",
       traits: ["Intuitive", "Sensitive", "Mysterious", "Perceptive"],
       compatibility: "Best paired with: Night photography, ghost tours, atmospheric music"
@@ -132,8 +126,8 @@ const QuizPage: React.FC = () => {
 
   const getResult = () => {
     const traitCounts: Record<string, number> = {};
-    answers.forEach(answer => {
-      const question = questions[Math.floor(Math.random() * questions.length)];
+    answers.forEach((answer, idx) => {
+      const question = questions[idx];
       const option = question.options.find(o => o.value === answer);
       if (option) {
         traitCounts[option.trait] = (traitCounts[option.trait] || 0) + 1;
@@ -159,15 +153,13 @@ const QuizPage: React.FC = () => {
       <div className="container mx-auto px-4 max-w-3xl">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <Sparkles className="w-10 h-10 text-white" />
+          <div className="w-20 h-20 bg-crimson/10 border border-crimson/30 rounded-lg flex items-center justify-center mx-auto mb-6">
+            <Sparkles className="w-10 h-10 text-crimson" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
-              Yokai Personality Quiz
-            </span>
+          <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 text-ink-base">
+            Yōkai Personality Quiz
           </h1>
-          <p className="text-xl text-gray-400">
+          <p className="text-xl text-ink-muted">
             Discover which supernatural creature from Japanese folklore matches your personality in just 3 minutes.
           </p>
         </div>
@@ -176,12 +168,12 @@ const QuizPage: React.FC = () => {
         {quizStarted && !showResult && (
           <div className="mb-8">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-gray-400">Question {currentQuestion + 1} of {questions.length}</span>
-              <span className="text-sm text-purple-400">{Math.round(((currentQuestion + 1) / questions.length) * 100)}%</span>
+              <span className="text-sm text-ink-muted">Question {currentQuestion + 1} of {questions.length}</span>
+              <span className="text-sm text-crimson font-medium">{Math.round(((currentQuestion + 1) / questions.length) * 100)}%</span>
             </div>
-            <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+            <div className="h-2 bg-parchment-alt border border-ink-subtle rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-500"
+                className="h-full bg-crimson rounded-full transition-all duration-500"
                 style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
               ></div>
             </div>
@@ -189,25 +181,25 @@ const QuizPage: React.FC = () => {
         )}
 
         {/* Quiz Content */}
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
+        <div className="card-archive p-8">
           {!quizStarted && (
             <div className="text-center">
               <div className="grid grid-cols-3 gap-4 mb-8">
-                <div className="bg-purple-500/10 rounded-xl p-4">
-                  <div className="text-2xl mb-2">🦊</div>
-                  <div className="text-xs text-gray-400">Kitsune</div>
+                <div className="card-parchment p-4">
+                  <div className="text-3xl mb-2">🦊</div>
+                  <div className="text-xs text-ink-muted">Kitsune</div>
                 </div>
-                <div className="bg-pink-500/10 rounded-xl p-4">
-                  <div className="text-2xl mb-2">👻</div>
-                  <div className="text-xs text-gray-400">Yūrei</div>
+                <div className="card-parchment p-4">
+                  <div className="text-3xl mb-2">👻</div>
+                  <div className="text-xs text-ink-muted">Yūrei</div>
                 </div>
-                <div className="bg-red-500/10 rounded-xl p-4">
-                  <div className="text-2xl mb-2">👹</div>
-                  <div className="text-xs text-gray-400">Oni</div>
+                <div className="card-parchment p-4">
+                  <div className="text-3xl mb-2">👹</div>
+                  <div className="text-xs text-ink-muted">Oni</div>
                 </div>
               </div>
 
-              <div className="flex items-center justify-center gap-6 mb-8 text-sm text-gray-400">
+              <div className="flex items-center justify-center gap-6 mb-8 text-sm text-ink-muted">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
                   <span>3 minutes</span>
@@ -224,9 +216,9 @@ const QuizPage: React.FC = () => {
 
               <button
                 onClick={() => setQuizStarted(true)}
-                className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl font-bold text-lg hover:from-purple-600 hover:to-pink-600 transition-all shadow-lg shadow-purple-500/25"
+                className="group btn-primary inline-flex items-center gap-2"
               >
-                Start Quiz
+                Begin Your Journey
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
@@ -234,7 +226,7 @@ const QuizPage: React.FC = () => {
 
           {quizStarted && !showResult && (
             <div>
-              <h2 className="text-xl font-bold mb-6 text-center">
+              <h2 className="text-xl font-display font-bold mb-6 text-center text-ink-base">
                 {questions[currentQuestion].question}
               </h2>
               <div className="space-y-3">
@@ -242,13 +234,13 @@ const QuizPage: React.FC = () => {
                   <button
                     key={option.value}
                     onClick={() => handleAnswer(option.value)}
-                    className="w-full text-left p-4 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:border-purple-500/30 transition-all group"
+                    className="w-full text-left p-4 bg-parchment-alt border border-ink-subtle rounded-lg hover:bg-parchment hover:border-crimson/30 transition-all group"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-gray-200 group-hover:text-white transition-colors">
+                      <span className="text-ink-base group-hover:text-crimson transition-colors font-serif">
                         {option.label}
                       </span>
-                      <ChevronRight className="w-5 h-5 text-gray-500 group-hover:text-purple-400 transition-colors" />
+                      <ChevronRight className="w-5 h-5 text-gold group-hover:text-crimson transition-colors" />
                     </div>
                   </button>
                 ))}
@@ -259,14 +251,13 @@ const QuizPage: React.FC = () => {
           {showResult && (
             <div className="text-center">
               <div className="mb-6">
-                <div className="text-8xl mb-4">{getResult().emoji}</div>
-                <h2 className="text-3xl font-bold mb-2">
-                  You are a <span className="text-purple-400">{getResult().name}</span>
+                <div className="text-8xl mb-4">{getResult().japanese}</div>
+                <h2 className="text-3xl font-display font-bold mb-2 text-ink-base">
+                  You are a <span className="text-crimson">{getResult().name}</span>
                 </h2>
-                <p className="text-sm text-purple-400">{getResult().japanese}</p>
               </div>
 
-              <p className="text-gray-300 mb-8 leading-relaxed">
+              <p className="text-ink-muted mb-8 leading-relaxed font-serif">
                 {getResult().description}
               </p>
 
@@ -274,30 +265,30 @@ const QuizPage: React.FC = () => {
                 {getResult().traits.map((trait) => (
                   <span
                     key={trait}
-                    className="px-4 py-2 bg-purple-500/20 text-purple-400 rounded-full text-sm font-medium"
+                    className="px-4 py-2 bg-gold/10 border border-gold/30 text-gold-dark rounded-full text-sm font-medium"
                   >
                     {trait}
                   </span>
                 ))}
               </div>
 
-              <div className="bg-white/5 rounded-xl p-4 mb-8">
-                <p className="text-sm text-gray-400">
-                  <strong className="text-white">Compatibility:</strong> {getResult().compatibility}
+              <div className="card-parchment p-4 mb-8">
+                <p className="text-sm text-ink-muted font-serif">
+                  <strong className="text-ink-base">Compatibility:</strong> {getResult().compatibility}
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
                   onClick={restartQuiz}
-                  className="flex items-center justify-center gap-2 px-6 py-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all"
+                  className="flex items-center justify-center gap-2 px-6 py-3 bg-parchment-alt border border-ink-subtle rounded-lg hover:bg-parchment transition-colors font-medium"
                 >
                   <RotateCcw className="w-4 h-4" />
                   Take Again
                 </button>
                 <Link
                   to="/yokai"
-                  className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl font-semibold hover:from-purple-600 hover:to-pink-600 transition-all"
+                  className="flex items-center justify-center gap-2 px-6 py-3 btn-primary"
                 >
                   Learn About {getResult().name}
                   <ArrowRight className="w-4 h-4" />
@@ -314,19 +305,19 @@ const QuizPage: React.FC = () => {
               {['S', 'K', 'M', 'A', 'J'].map((initial, i) => (
                 <div
                   key={i}
-                  className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-xs font-bold border-2 border-slate-900"
+                  className="w-8 h-8 bg-crimson/10 border border-crimson/30 rounded-full flex items-center justify-center text-xs font-bold text-crimson"
                 >
                   {initial}
                 </div>
               ))}
             </div>
-            <span className="text-sm text-gray-400">+4,995 people took this quiz</span>
+            <span className="text-sm text-ink-muted">+4,995 people took this quiz</span>
           </div>
           <div className="flex items-center justify-center gap-1">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+              <Star key={i} className="w-5 h-5 text-gold fill-gold" />
             ))}
-            <span className="text-sm text-gray-400 ml-2">4.9/5 rating</span>
+            <span className="text-sm text-ink-muted ml-2">4.9/5 rating</span>
           </div>
         </div>
       </div>

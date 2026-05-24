@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Sparkles, Wand2, RefreshCw, Copy, Check, ArrowRight,
-  Ghost, Heart, Moon, BookOpen, Star, Zap
+  Ghost, Heart, Moon, BookOpen, Star, Scroll
 } from 'lucide-react';
 
 const StoryOraclePage: React.FC = () => {
@@ -13,11 +13,11 @@ const StoryOraclePage: React.FC = () => {
   const [copied, setCopied] = useState(false);
 
   const moods = [
-    { id: 'chilling', label: 'Chilling', emoji: '🥶', description: 'Hair-raising terror' },
-    { id: 'mysterious', label: 'Mysterious', emoji: '🔮', description: 'Puzzle and intrigue' },
-    { id: 'bittersweet', label: 'Bittersweet', emoji: '😢', description: 'Sad beauty' },
-    { id: 'whimsical', label: 'Whimsical', emoji: '✨', description: 'Playful magic' },
-    { id: 'romantic', label: 'Romantic', emoji: '💕', description: 'Love and longing' },
+    { id: 'chilling', label: 'Chilling', description: 'Hair-raising terror' },
+    { id: 'mysterious', label: 'Mysterious', description: 'Puzzle and intrigue' },
+    { id: 'bittersweet', label: 'Bittersweet', description: 'Sad beauty' },
+    { id: 'whimsical', label: 'Whimsical', description: 'Playful magic' },
+    { id: 'romantic', label: 'Romantic', description: 'Love and longing' },
   ];
 
   const genres = [
@@ -97,9 +97,11 @@ const StoryOraclePage: React.FC = () => {
   const generateStory = () => {
     setIsGenerating(true);
 
-    // Simulate API call
     setTimeout(() => {
-      const story = sampleStories[Math.floor(Math.random() * sampleStories.length)];
+      const filtered = sampleStories.filter(s => s.mood === mood && s.genre === genre);
+      const story = filtered.length > 0
+        ? filtered[Math.floor(Math.random() * filtered.length)]
+        : sampleStories[Math.floor(Math.random() * sampleStories.length)];
       setGeneratedStory(story);
       setIsGenerating(false);
     }, 2000);
@@ -138,40 +140,37 @@ ${generatedStory.ending}
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <Wand2 className="w-10 h-10 text-white" />
+          <div className="w-20 h-20 bg-crimson/10 border border-crimson/30 rounded-lg flex items-center justify-center mx-auto mb-6">
+            <Wand2 className="w-10 h-10 text-crimson" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
-              Story Oracle
-            </span>
+          <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 text-ink-base">
+            Story Oracle
           </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-ink-muted max-w-2xl mx-auto">
             Let the ancient spirits inspire your next tale. Describe your mood and genre, and receive a unique supernatural story seed.
           </p>
         </div>
 
         {/* Generator Form */}
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-8 mb-8">
-          <h2 className="text-xl font-bold mb-6 text-center">What story do you seek?</h2>
+        <div className="card-archive p-8 mb-8">
+          <h2 className="text-xl font-display font-bold mb-6 text-center text-ink-base">What story do you seek?</h2>
 
           {/* Mood Selection */}
           <div className="mb-8">
-            <label className="block text-sm font-medium text-gray-300 mb-3">Select your mood</label>
+            <label className="block text-sm font-medium text-ink-base mb-3">Select your mood</label>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
               {moods.map((m) => (
                 <button
                   key={m.id}
                   onClick={() => setMood(m.id)}
-                  className={`p-4 rounded-xl border transition-all ${
+                  className={`p-4 rounded-lg border transition-all font-serif ${
                     mood === m.id
-                      ? 'bg-purple-500/20 border-purple-500 text-white'
-                      : 'bg-white/5 border-white/10 text-gray-400 hover:border-purple-500/30'
+                      ? 'bg-crimson/10 border-crimson text-ink-base'
+                      : 'bg-parchment-alt border-ink-subtle text-ink-muted hover:border-crimson/30'
                   }`}
                 >
-                  <div className="text-2xl mb-2">{m.emoji}</div>
-                  <div className="font-medium text-sm">{m.label}</div>
-                  <div className="text-xs text-gray-500 mt-1">{m.description}</div>
+                  <div className="font-medium text-sm mb-1">{m.label}</div>
+                  <div className="text-xs text-ink-muted">{m.description}</div>
                 </button>
               ))}
             </div>
@@ -179,20 +178,20 @@ ${generatedStory.ending}
 
           {/* Genre Selection */}
           <div className="mb-8">
-            <label className="block text-sm font-medium text-gray-300 mb-3">Choose a genre</label>
+            <label className="block text-sm font-medium text-ink-base mb-3">Choose a genre</label>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {genres.map((g) => (
                 <button
                   key={g.id}
                   onClick={() => setGenre(g.id)}
-                  className={`p-4 rounded-xl border transition-all ${
+                  className={`p-4 rounded-lg border transition-all font-serif ${
                     genre === g.id
-                      ? 'bg-purple-500/20 border-purple-500 text-white'
-                      : 'bg-white/5 border-white/10 text-gray-400 hover:border-purple-500/30'
+                      ? 'bg-crimson/10 border-crimson text-ink-base'
+                      : 'bg-parchment-alt border-ink-subtle text-ink-muted hover:border-crimson/30'
                   }`}
                 >
-                  <div className="font-medium">{g.label}</div>
-                  <div className="text-xs text-gray-500 mt-1">{g.description}</div>
+                  <div className="font-medium text-sm">{g.label}</div>
+                  <div className="text-xs text-ink-muted mt-1">{g.description}</div>
                 </button>
               ))}
             </div>
@@ -202,7 +201,7 @@ ${generatedStory.ending}
           <button
             onClick={generateStory}
             disabled={!mood || !genre || isGenerating}
-            className="w-full py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl font-bold text-lg hover:from-purple-600 hover:to-pink-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full py-4 btn-primary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {isGenerating ? (
               <>
@@ -220,22 +219,19 @@ ${generatedStory.ending}
 
         {/* Generated Story */}
         {generatedStory && (
-          <div className="bg-gradient-to-br from-purple-900/50 to-pink-900/50 border border-purple-500/20 rounded-2xl p-8">
+          <div className="card-parchment p-8">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <div className="text-4xl">
-                  {moods.find(m => m.id === generatedStory.mood)?.emoji || '✨'}
-                </div>
                 <div>
-                  <h3 className="text-xl font-bold">{generatedStory.title}</h3>
-                  <p className="text-sm text-purple-400">
+                  <h3 className="text-xl font-display font-bold text-ink-base">{generatedStory.title}</h3>
+                  <p className="text-sm text-crimson font-serif">
                     {generatedStory.mood} • {generatedStory.genre}
                   </p>
                 </div>
               </div>
               <button
                 onClick={copyStory}
-                className="flex items-center gap-2 px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition-all text-sm"
+                className="flex items-center gap-2 px-4 py-2 bg-parchment-alt border border-ink-subtle rounded-lg hover:bg-parchment transition-all text-sm font-medium"
               >
                 {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 {copied ? 'Copied!' : 'Copy'}
@@ -244,15 +240,15 @@ ${generatedStory.ending}
 
             <div className="space-y-6">
               <div>
-                <h4 className="text-sm font-semibold text-purple-400 mb-2">PREMISE</h4>
-                <p className="text-gray-300 leading-relaxed">{generatedStory.premise}</p>
+                <h4 className="text-sm font-semibold text-crimson mb-2 font-display">PREMISE</h4>
+                <p className="text-ink-muted leading-relaxed font-serif">{generatedStory.premise}</p>
               </div>
 
               <div>
-                <h4 className="text-sm font-semibold text-purple-400 mb-2">CHARACTERS</h4>
+                <h4 className="text-sm font-semibold text-crimson mb-2 font-display">CHARACTERS</h4>
                 <div className="flex flex-wrap gap-2">
                   {generatedStory.characters.map((char: string, i: number) => (
-                    <span key={i} className="px-3 py-1 bg-white/10 rounded-full text-sm">
+                    <span key={i} className="px-3 py-1 bg-parchment-alt border border-ink-subtle text-sm font-serif">
                       {char}
                     </span>
                   ))}
@@ -260,41 +256,41 @@ ${generatedStory.ending}
               </div>
 
               <div>
-                <h4 className="text-sm font-semibold text-purple-400 mb-2">SETTING</h4>
-                <p className="text-gray-300">{generatedStory.setting}</p>
+                <h4 className="text-sm font-semibold text-crimson mb-2 font-display">SETTING</h4>
+                <p className="text-ink-muted font-serif">{generatedStory.setting}</p>
               </div>
 
               <div>
-                <h4 className="text-sm font-semibold text-purple-400 mb-2">PLOT POINTS</h4>
+                <h4 className="text-sm font-semibold text-crimson mb-2 font-display">PLOT POINTS</h4>
                 <ol className="space-y-2">
                   {generatedStory.plotPoints.map((point: string, i: number) => (
                     <li key={i} className="flex gap-3">
-                      <span className="w-6 h-6 bg-purple-500/20 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">
+                      <span className="w-6 h-6 bg-crimson/10 border border-crimson/20 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 text-crimson">
                         {i + 1}
                       </span>
-                      <span className="text-gray-300">{point}</span>
+                      <span className="text-ink-muted font-serif">{point}</span>
                     </li>
                   ))}
                 </ol>
               </div>
 
-              <div className="border-t border-white/10 pt-6">
-                <h4 className="text-sm font-semibold text-purple-400 mb-2">ENDING</h4>
-                <p className="text-gray-200 leading-relaxed italic">{generatedStory.ending}</p>
+              <div className="border-t border-ink-subtle pt-6">
+                <h4 className="text-sm font-semibold text-crimson mb-2 font-display">ENDING</h4>
+                <p className="text-ink-base leading-relaxed italic font-serif">{generatedStory.ending}</p>
               </div>
             </div>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <button
                 onClick={generateStory}
-                className="flex-1 flex items-center justify-center gap-2 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition-all"
+                className="flex-1 flex items-center justify-center gap-2 py-3 bg-parchment-alt border border-ink-subtle rounded-lg hover:bg-parchment transition-all font-medium"
               >
                 <RefreshCw className="w-4 h-4" />
                 Generate Another
               </button>
               <Link
                 to="/pricing"
-                className="flex-1 flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl font-semibold hover:from-purple-600 hover:to-pink-600 transition-all"
+                className="flex-1 flex items-center justify-center gap-2 py-3 btn-primary"
               >
                 <BookOpen className="w-4 h-4" />
                 Get Full Access
@@ -305,20 +301,18 @@ ${generatedStory.ending}
         )}
 
         {/* Info Box */}
-        <div className="mt-8 bg-white/5 border border-white/10 rounded-xl p-6">
+        <div className="mt-8 card-parchment p-6">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-              <Ghost className="w-6 h-6 text-purple-400" />
+            <div className="w-12 h-12 bg-crimson/10 border border-crimson/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <Ghost className="w-6 h-6 text-crimson" />
             </div>
             <div>
-              <h3 className="font-bold mb-2">About Story Oracle</h3>
-              <p className="text-sm text-gray-400 leading-relaxed">
+              <h3 className="font-display font-bold mb-2 text-ink-base">About Story Oracle</h3>
+              <p className="text-sm text-ink-muted leading-relaxed font-serif">
                 Our Story Oracle uses carefully crafted story templates inspired by traditional Japanese supernatural tales.
                 Each generated story seed includes a premise, character concepts, setting details, plot structure, and an ending twist.
                 Use these as starting points for your own writing, games, or creative projects.
-                <span className="text-purple-400 ml-1">
-                  <Link to="/pricing">Upgrade to Premium</Link>
-                </span> for unlimited generations and access to our full story archive.
+                <Link to="/pricing" className="text-crimson ml-1 hover:underline">Upgrade to Premium</Link> for unlimited generations and access to our full story archive.
               </p>
             </div>
           </div>

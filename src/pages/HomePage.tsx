@@ -1,379 +1,266 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Ghost, ArrowRight, Play, Star, BookOpen, Sparkles,
-  Moon, Heart, Users, CheckCircle, ChevronRight, Zap,
-  Shield, Globe, Clock, ArrowDown
-} from 'lucide-react';
+import { BookOpen, ArrowRight, ChevronRight } from 'lucide-react';
 
 const HomePage: React.FC = () => {
-  const [stats, setStats] = useState({ stories: 0, yokai: 0, members: 0 });
-
-  const features = [
+  const featuredStories = [
     {
-      icon: <BookOpen className="w-8 h-8" />,
-      title: "Curated Ghost Stories",
-      description: "Beautifully told Japanese supernatural tales with cultural context and historical significance."
+      title: 'The Tale of Oiwa',
+      excerpt: 'One of the most famous ghosts in Japanese theater, the betrayed wife whose vengeance knows no bounds. A story of love, betrayal, and eternal retribution.',
+      category: 'Classic Kaidan',
+      readTime: '8 min',
+      slug: 'tale-of-oiwa'
     },
     {
-      icon: <Globe className="w-8 h-8" />,
-      title: "Yōkai Encyclopedia",
-      description: "Comprehensive guide to supernatural creatures from Japanese folklore, with origins and stories."
+      title: 'Kappa of the Gifu River',
+      excerpt: 'A curious creature who loves nothing more than perfecting its cucumber-based recipes. Surprisingly wholesome for a creature of the deep.',
+      category: 'Yōkai Tales',
+      readTime: '5 min',
+      slug: 'kappa-of-gifu-river'
     },
     {
-      icon: <Sparkles className="w-8 h-8" />,
-      title: "Interactive Tools",
-      description: "Take our personality quiz or use the Story Oracle to generate unique supernatural tales."
-    },
-    {
-      icon: <Users className="w-8 h-8" />,
-      title: "Community",
-      description: "Join thousands of enthusiasts who share your passion for Japanese supernatural traditions."
+      title: 'The Suicide Forest',
+      excerpt: "Aokigahara's dark reputation and the legends that explain why people journey there. A exploration of one of the world's most mysterious forests.",
+      category: 'Modern Horror',
+      readTime: '12 min',
+      slug: 'suicide-forest'
     }
   ];
 
-  const testimonials = [
-    {
-      name: "Sarah M.",
-      role: "Horror Writer",
-      quote: "GhostingLeik is the only place I find Japanese horror content that respects the culture while being genuinely engaging.",
-      avatar: "S"
-    },
-    {
-      name: "Kenji R.",
-      role: "Game Developer",
-      quote: "I use GhostingLeik's yokai compendium for every supernatural game project. It's become an essential reference.",
-      avatar: "K"
-    },
-    {
-      name: "Maya T.",
-      role: "Japanophile",
-      quote: "I was intimidated by Japanese folklore, but GhostingLeik made it accessible and fascinating.",
-      avatar: "M"
-    }
-  ];
-
-  const recentStories = [
-    {
-      title: "The Tale of Oiwa",
-      excerpt: "One of the most famous ghosts in Japanese theater, the betrayed wife whose vengeance knows no bounds...",
-      category: "Classic",
-      readTime: "8 min"
-    },
-    {
-      title: "Kappa of the Gifu River",
-      excerpt: "A curious creature who loves nothing more than perfecting its cucumber-based recipes...",
-      category: "Yōkai",
-      readTime: "5 min"
-    },
-    {
-      title: "The Suicide Forest",
-      excerpt: "Aokigahara's dark reputation and the legends that explain why people journey there...",
-      category: "Modern",
-      readTime: "12 min"
-    }
+  const yokai = [
+    { name: 'Kitsune', japanese: '狐', type: 'Fox Spirit', danger: 'Medium' },
+    { name: 'Kappa', japanese: '河童', type: 'Water Demon', danger: 'Low' },
+    { name: 'Yūrei', japanese: '幽霊', type: 'Restless Ghost', danger: 'High' },
+    { name: 'Oni', japanese: '鬼', type: 'Demon Ogre', danger: 'Very High' }
   ];
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 lg:py-32">
-        {/* Background Effects */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute top-40 right-20 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute bottom-20 left-1/4 w-80 h-80 bg-red-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/20 border border-purple-500/30 rounded-full mb-8">
-              <Sparkles className="w-4 h-4 text-purple-400" />
-              <span className="text-sm text-purple-300">Japanese Supernatural Content</span>
-            </div>
-
-            {/* Main Headline */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
-                Where Ghosts Come
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
-                to Life
-              </span>
-            </h1>
-
-            {/* Subheadline */}
-            <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-              Discover the mysterious world of Japanese ghost stories (kaidan) and supernatural folklore (yōkai). Beautifully curated content that entertains, educates, and inspires.
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <Link
-                to="/stories"
-                className="group flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl font-semibold text-white hover:from-purple-600 hover:to-pink-600 transition-all shadow-lg shadow-purple-500/25"
-              >
-                <BookOpen className="w-5 h-5" />
-                Explore Stories
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                to="/quiz"
-                className="flex items-center justify-center gap-2 px-8 py-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl font-semibold text-white hover:bg-white/10 transition-all"
-              >
-                <Sparkles className="w-5 h-5" />
-                Take the Quiz
-              </Link>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto">
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4">
-                <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">156+</div>
-                <div className="text-xs md:text-sm text-gray-400">Ghost Stories</div>
-              </div>
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4">
-                <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">89</div>
-                <div className="text-xs md:text-sm text-gray-400">Yōkai</div>
-              </div>
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4">
-                <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">5K+</div>
-                <div className="text-xs md:text-sm text-gray-400">Members</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <ChevronRight className="w-6 h-6 text-gray-400 rotate-90" />
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                Your Guide to Japan's Supernatural World
-              </span>
-            </h2>
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-              Whether you're a horror enthusiast, a writer seeking inspiration, or a Japanophile hungry for cultural depth—you've found your destination.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-purple-500/30 transition-all duration-300"
-              >
-                <div className="w-14 h-14 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center mb-5 text-purple-400 group-hover:scale-110 transition-transform">
-                  {feature.icon}
-                </div>
-                <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Recent Stories Section */}
-      <section className="py-20 bg-black/20">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-12">
+      {/* Hero Section - Archive Entrance */}
+      <section className="relative py-20 lg:py-32">
+        <div className="container-archive">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left: Text Content */}
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-2">
-                <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  From the Archives
-                </span>
-              </h2>
-              <p className="text-gray-400">Explore our most compelling ghost stories</p>
+              <span className="section-label">Japanese Supernatural Archive</span>
+              <h1 className="text-hero mb-6">
+                Where Ghosts<br />
+                <span className="text-[var(--gold-antique)]">Come to Life</span>
+              </h1>
+              <p className="excerpt-text mb-8 max-w-lg">
+                A curated archive of Japanese ghost stories, yōkai folklore, strange legends, and supernatural tales from the land of the rising dead.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link to="/stories" className="btn-primary">
+                  <BookOpen className="w-5 h-5" />
+                  Enter the Archive
+                </Link>
+                <Link to="/quiz" className="btn-archive">
+                  Take the Quiz
+                </Link>
+              </div>
             </div>
-            <Link
-              to="/stories"
-              className="hidden md:flex items-center gap-2 text-purple-400 hover:text-purple-300 font-semibold"
-            >
-              View All Stories
-              <ArrowRight className="w-4 h-4" />
+
+            {/* Right: Visual Panel */}
+            <div className="relative">
+              <div className="bg-[var(--ink-surface)] border border-[var(--border-medium)] p-8">
+                <span className="section-label mb-4 block">Featured Entry</span>
+                <div className="text-center mb-6">
+                  <span className="text-6xl">👻</span>
+                </div>
+                <h3 className="font-display text-2xl mb-2 text-[var(--text-primary)]">The Yūrei</h3>
+                <p className="text-sm text-[var(--text-muted)] mb-4">幽霊 · Ghost</p>
+                <p className="excerpt-text text-sm">
+                  Restless spirits of the dead who return to the world of the living. Always wearing white, always barefoot, always watching.
+                </p>
+                <div className="mt-6 pt-6 border-t border-[var(--border-subtle)]">
+                  <Link to="/yokai/yurei" className="text-[var(--gold-antique)] text-sm font-medium hover:text-[var(--gold-bright)] flex items-center gap-2">
+                    Read Full Entry <ChevronRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="container-archive">
+        <div className="divider-ink"></div>
+      </div>
+
+      {/* Featured Stories Section */}
+      <section className="py-20">
+        <div className="container-archive">
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <span className="section-label">From the Archive</span>
+              <h2 className="text-display text-[var(--text-primary)]">Begin with a Tale</h2>
+            </div>
+            <Link to="/stories" className="hidden md:flex items-center gap-2 text-[var(--gold-antique)] text-sm font-medium hover:text-[var(--gold-bright)]">
+              View All Stories <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {recentStories.map((story, index) => (
+            {featuredStories.map((story, index) => (
               <Link
                 key={index}
-                to={`/stories/${story.title.toLowerCase().replace(/\s+/g, '-')}`}
-                className="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-purple-500/30 transition-all"
+                to={`/stories/${story.slug}`}
+                className="card-archive group"
               >
-                <div className="h-40 bg-gradient-to-br from-purple-900/50 to-pink-900/50 flex items-center justify-center">
-                  <Ghost className="w-16 h-16 text-white/20" />
+                {/* Archive Number */}
+                <div className="px-6 pt-6 pb-4">
+                  <span className="text-xs text-[var(--gold-faded)] font-medium tracking-wider">
+                    Entry No. {String(index + 1).padStart(3, '0')}
+                  </span>
                 </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="px-2 py-1 bg-purple-500/20 text-purple-400 text-xs rounded-full">{story.category}</span>
-                    <span className="text-xs text-gray-500">{story.readTime} read</span>
+
+                {/* Content */}
+                <div className="px-6 pb-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="label-ink">{story.category}</span>
+                    <span className="text-xs text-[var(--text-muted)]">{story.readTime} read</span>
                   </div>
-                  <h3 className="text-lg font-bold mb-2 group-hover:text-purple-400 transition-colors">{story.title}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">{story.excerpt}</p>
+                  <h3 className="font-display text-xl mb-3 text-[var(--text-primary)] group-hover:text-[var(--gold-antique)] transition-colors">
+                    {story.title}
+                  </h3>
+                  <p className="excerpt-text text-sm line-clamp-3">{story.excerpt}</p>
+                </div>
+
+                {/* Footer */}
+                <div className="px-6 py-4 border-t border-[var(--border-subtle)] flex items-center justify-between">
+                  <span className="text-xs text-[var(--text-muted)]">Tap to read</span>
+                  <ChevronRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--gold-antique)] transition-colors" />
                 </div>
               </Link>
             ))}
           </div>
 
           <div className="mt-8 text-center md:hidden">
-            <Link
-              to="/stories"
-              className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 font-semibold"
-            >
+            <Link to="/stories" className="btn-archive">
               View All Stories
-              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Lead Magnet Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-gradient-to-br from-purple-900/50 via-pink-900/50 to-red-900/50 backdrop-blur-sm border border-purple-500/20 rounded-3xl p-8 md:p-12 text-center">
-              <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <Sparkles className="w-8 h-8 text-purple-400" />
-              </div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
-                Discover Your Yokai Spirit
-              </h2>
-              <p className="text-gray-300 mb-8 max-w-xl mx-auto">
-                Take our 3-minute personality quiz and discover which supernatural creature from Japanese folklore matches your personality.
-              </p>
-              <Link
-                to="/quiz"
-                className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-purple-600 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all"
-              >
-                Take the Quiz
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+      {/* Yōkai Section */}
+      <section className="py-20 bg-[var(--ink-black)]">
+        <div className="container-archive">
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <span className="section-label">Field Guide</span>
+              <h2 className="text-display text-[var(--text-primary)]">Meet the Yōkai</h2>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Yōkai Preview Section */}
-      <section className="py-20 bg-black/20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Popular Yōkai
-              </span>
-            </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Explore the fascinating supernatural creatures of Japanese folklore
-            </p>
+            <Link to="/yokai" className="hidden md:flex items-center gap-2 text-[var(--gold-antique)] text-sm font-medium hover:text-[var(--gold-bright)]">
+              Full Encyclopedia <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {['Kitsune', 'Kappa', 'Yūrei', 'Oni'].map((yokai, index) => (
+            {yokai.map((creature, index) => (
               <Link
                 key={index}
-                to={`/yokai/${yokai.toLowerCase()}`}
-                className="group bg-white/5 border border-white/10 rounded-xl p-6 text-center hover:border-purple-500/30 transition-all"
+                to={`/yokai/${creature.name.toLowerCase()}`}
+                className="card-archive text-center group"
               >
-                <div className="text-5xl mb-3">{
-                  yokai === 'Kitsune' ? '🦊' :
-                  yokai === 'Kappa' ? '🐸' :
-                  yokai === 'Yūrei' ? '👻' : '👹'
-                }</div>
-                <h3 className="font-bold group-hover:text-purple-400 transition-colors">{yokai}</h3>
-                <p className="text-xs text-gray-500 mt-1">{
-                  yokai === 'Kitsune' ? 'Fox Spirit' :
-                  yokai === 'Kappa' ? 'Water Demon' :
-                  yokai === 'Yūrei' ? 'Restless Ghost' : 'Demon Ogre'
-                }</p>
+                <div className="p-6">
+                  <span className="text-4xl mb-4 block">
+                    {creature.name === 'Kitsune' ? '🦊' :
+                     creature.name === 'Kappa' ? '🐸' :
+                     creature.name === 'Yūrei' ? '👻' : '👹'}
+                  </span>
+                  <span className="text-xs text-[var(--gold-faded)] tracking-wider block mb-2">{creature.japanese}</span>
+                  <h3 className="font-display text-lg mb-1 text-[var(--text-primary)] group-hover:text-[var(--gold-antique)] transition-colors">
+                    {creature.name}
+                  </h3>
+                  <p className="text-xs text-[var(--text-muted)] mb-3">{creature.type}</p>
+                  <span className={`text-xs px-2 py-1 ${
+                    creature.danger === 'Low' ? 'label-ink' :
+                    creature.danger === 'Medium' ? 'label-gold' :
+                    'label-crimson'
+                  }`}>
+                    {creature.danger}
+                  </span>
+                </div>
               </Link>
-            ))}
-          </div>
-
-          <div className="text-center mt-8">
-            <Link
-              to="/yokai"
-              className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 font-semibold"
-            >
-              Explore Yōkai Encyclopedia
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                What Our Community Says
-              </span>
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white/5 border border-white/10 rounded-2xl p-6">
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-gray-300 mb-6 italic">"{testimonial.quote}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center font-bold">
-                    {testimonial.avatar}
-                  </div>
-                  <div>
-                    <div className="font-semibold">{testimonial.name}</div>
-                    <div className="text-sm text-gray-400">{testimonial.role}</div>
-                  </div>
-                </div>
-              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Quiz Section */}
       <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center bg-gradient-to-br from-purple-900/50 to-pink-900/50 backdrop-blur-sm border border-purple-500/20 rounded-3xl p-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-              Ready to Explore?
-            </h2>
-            <p className="text-lg text-gray-300 mb-8 max-w-xl mx-auto">
-              Join thousands of enthusiasts who've made GhostingLeik their destination for Japanese supernatural content.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/pricing"
-                className="group flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl font-semibold text-white hover:from-purple-600 hover:to-pink-600 transition-all"
-              >
-                <Star className="w-5 h-5" />
-                Join Membership
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                to="/stories"
-                className="flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl font-semibold text-white hover:bg-white/20 transition-all"
-              >
-                <BookOpen className="w-5 h-5" />
-                Browse Stories
+        <div className="container-archive">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <span className="section-label">Consult the Oracle</span>
+              <h2 className="text-display text-[var(--text-primary)] mb-4">Discover Your Spirit</h2>
+              <p className="excerpt-text mb-6">
+                Take our three-minute personality quiz and discover which supernatural creature from Japanese folklore matches your inner nature.
+              </p>
+              <Link to="/quiz" className="btn-gold">
+                Take the Quiz
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
+            <div className="bg-[var(--ink-surface)] border border-[var(--border-subtle)] p-8">
+              <div className="text-center">
+                <span className="text-5xl mb-4 block">🔮</span>
+                <p className="text-sm text-[var(--text-muted)] italic">
+                  "Are you a cunning Kitsune, a playful Kappa, or perhaps a mysterious Yūrei?"
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Membership Section */}
+      <section className="py-20 bg-[var(--indigo-deep)]">
+        <div className="container-archive">
+          <div className="max-w-3xl mx-auto text-center">
+            <span className="section-label">Join the Inner Archive</span>
+            <h2 className="text-display text-[var(--bone-white)] mb-4">Become a Member</h2>
+            <p className="excerpt-text mb-8 max-w-xl mx-auto">
+              Unlock full access to 156+ ghost stories, 89+ yōkai entries, unlimited Story Oracle generations, and exclusive collector content.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/pricing" className="btn-primary">
+                View Membership Tiers
+              </Link>
+              <Link to="/stories" className="btn-gold">
+                Browse Free Stories
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20">
+        <div className="container-archive">
+          <div className="max-w-3xl mx-auto">
+            <span className="section-label text-center block mb-8">Field Notes</span>
+
+            <blockquote className="pull-quote mb-8">
+              "GhostingLeik is the only place I find Japanese horror content that respects the culture while being genuinely engaging."
+            </blockquote>
+            <p className="text-sm text-[var(--text-muted)]">
+              — Sarah M., Horror Writer
+            </p>
+
+            <div className="divider-flourish my-12">
+              <span className="divider-flourish-icon">✦</span>
+            </div>
+
+            <blockquote className="pull-quote mb-8">
+              "I use GhostingLeik's yokai compendium for every supernatural game project. It's become an essential reference."
+            </blockquote>
+            <p className="text-sm text-[var(--text-muted)]">
+              — Kenji R., Game Developer
+            </p>
           </div>
         </div>
       </section>

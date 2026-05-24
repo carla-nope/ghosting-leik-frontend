@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Star, Check, ArrowRight, Zap, BookOpen, Users,
-  Crown, Heart, Shield, Clock, Gift, Sparkles
+  Crown, Heart, Shield, Clock, Gift, Sparkles, Scroll
 } from 'lucide-react';
 
 const PricingPage: React.FC = () => {
@@ -10,7 +10,7 @@ const PricingPage: React.FC = () => {
 
   const plans = [
     {
-      name: 'Free',
+      name: 'Seeker',
       price: 0,
       description: 'Perfect for exploring Japanese supernatural content',
       features: [
@@ -20,16 +20,16 @@ const PricingPage: React.FC = () => {
         'Weekly newsletter',
         'Community forum access',
       ],
-      cta: 'Get Started',
+      cta: 'Begin Your Journey',
       popular: false,
-      slug: 'free'
+      slug: 'seeker'
     },
     {
-      name: 'Premium',
+      name: 'Adept',
       price: isAnnual ? 7 : 9,
       description: 'Full access to all supernatural content and tools',
       features: [
-        'Everything in Free',
+        'Everything in Seeker',
         'Unlimited story access (150+ stories)',
         'Complete Yōkai encyclopedia (89+ entries)',
         'Unlimited Story Oracle generations',
@@ -38,16 +38,16 @@ const PricingPage: React.FC = () => {
         'Exclusive premium stories',
         'Private Discord community',
       ],
-      cta: 'Join Premium',
+      cta: 'Join the Adept',
       popular: true,
-      slug: 'premium'
+      slug: 'adept'
     },
     {
       name: 'Collector',
       price: isAnnual ? 12 : 15,
       description: 'For serious enthusiasts and researchers',
       features: [
-        'Everything in Premium',
+        'Everything in Adept',
         'Offline reading app (iOS/Android)',
         'Advanced search & filtering',
         'Custom collections & bookmarks',
@@ -72,8 +72,8 @@ const PricingPage: React.FC = () => {
       answer: 'We accept all major credit cards (Visa, Mastercard, American Express), PayPal, and Apple Pay.'
     },
     {
-      question: 'Is there a free trial for Premium?',
-      answer: 'Yes! New Premium members get a 7-day free trial. You can explore all premium features before committing.'
+      question: 'Is there a free trial for Adept?',
+      answer: 'Yes! New Adept members get a 7-day free trial. You can explore all premium features before committing.'
     },
     {
       question: 'Can I switch plans later?',
@@ -87,7 +87,7 @@ const PricingPage: React.FC = () => {
 
   const testimonials = [
     {
-      quote: "The premium subscription is worth every penny. The story archive is incredible and I've discovered so many hidden gems.",
+      quote: "The Adept subscription is worth every penny. The story archive is incredible and I've discovered so many hidden gems.",
       author: "Sarah M.",
       role: "Horror Writer"
     },
@@ -103,33 +103,31 @@ const PricingPage: React.FC = () => {
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/20 border border-purple-500/30 rounded-full mb-6">
-            <Crown className="w-4 h-4 text-purple-400" />
-            <span className="text-sm text-purple-300">Membership Plans</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-crimson/10 border border-crimson/30 rounded-full mb-6">
+            <Crown className="w-4 h-4 text-crimson" />
+            <span className="text-sm text-crimson font-medium">Membership Ranks</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
-              Choose Your Journey
-            </span>
+          <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 text-ink-base">
+            Choose Your Path
           </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-ink-muted max-w-2xl mx-auto mb-8">
             Unlock the mysteries of Japanese supernatural folklore. From casual exploration to deep research.
           </p>
 
           {/* Billing Toggle */}
-          <div className="inline-flex items-center gap-4 bg-white/5 rounded-full p-1">
+          <div className="inline-flex items-center gap-4 bg-parchment-alt border border-ink-subtle rounded-full p-1">
             <button
               onClick={() => setIsAnnual(true)}
               className={`px-6 py-2 rounded-full font-medium transition-all ${
-                isAnnual ? 'bg-purple-500 text-white' : 'text-gray-400 hover:text-white'
+                isAnnual ? 'bg-crimson text-bone-white' : 'text-ink-muted hover:text-ink-base'
               }`}
             >
-              Annual <span className="text-green-400 text-sm ml-1">-20%</span>
+              Annual <span className="text-green-600 text-sm ml-1">-20%</span>
             </button>
             <button
               onClick={() => setIsAnnual(false)}
               className={`px-6 py-2 rounded-full font-medium transition-all ${
-                !isAnnual ? 'bg-purple-500 text-white' : 'text-gray-400 hover:text-white'
+                !isAnnual ? 'bg-crimson text-bone-white' : 'text-ink-muted hover:text-ink-base'
               }`}
             >
               Monthly
@@ -142,30 +140,28 @@ const PricingPage: React.FC = () => {
           {plans.map((plan) => (
             <div
               key={plan.slug}
-              className={`relative bg-white/5 border rounded-2xl p-8 ${
-                plan.popular
-                  ? 'border-purple-500 ring-2 ring-purple-500/20'
-                  : 'border-white/10'
+              className={`relative card-archive p-8 ${
+                plan.popular ? 'ring-2 ring-crimson/30' : ''
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-sm font-semibold">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-crimson text-bone-white rounded-full text-sm font-semibold">
                   Most Popular
                 </div>
               )}
 
               <div className="text-center mb-6">
-                <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
-                <p className="text-sm text-gray-400">{plan.description}</p>
+                <h3 className="text-xl font-display font-bold mb-2 text-ink-base">{plan.name}</h3>
+                <p className="text-sm text-ink-muted font-serif">{plan.description}</p>
               </div>
 
               <div className="text-center mb-6">
                 <div className="flex items-baseline justify-center">
-                  <span className="text-4xl font-bold">${plan.price}</span>
-                  <span className="text-gray-400 ml-2">/month</span>
+                  <span className="text-4xl font-display font-bold text-ink-base">${plan.price}</span>
+                  <span className="text-ink-muted ml-2 font-serif">/month</span>
                 </div>
                 {isAnnual && plan.price > 0 && (
-                  <p className="text-sm text-green-400 mt-2">
+                  <p className="text-sm text-green-600 mt-2 font-serif">
                     Save ${(plan.price * 0.2 * 12).toFixed(0)}/year
                   </p>
                 )}
@@ -174,18 +170,18 @@ const PricingPage: React.FC = () => {
               <ul className="space-y-3 mb-8">
                 {plan.features.map((feature, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-gray-300">{feature}</span>
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-ink-muted font-serif">{feature}</span>
                   </li>
                 ))}
               </ul>
 
               <Link
                 to="/contact"
-                className={`block text-center py-3 rounded-xl font-semibold transition-all ${
+                className={`block text-center py-3 rounded-lg font-semibold transition-all ${
                   plan.popular
-                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600'
-                    : 'bg-white/10 text-white hover:bg-white/20'
+                    ? 'btn-primary'
+                    : 'bg-parchment-alt border border-ink-subtle text-ink-base hover:bg-parchment'
                 }`}
               >
                 {plan.cta}
@@ -196,15 +192,15 @@ const PricingPage: React.FC = () => {
 
         {/* Comparison Table */}
         <div className="mb-16">
-          <h2 className="text-2xl font-bold text-center mb-8">What's Included</h2>
+          <h2 className="text-2xl font-display font-bold text-center mb-8 text-ink-base">What's Included</h2>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-white/10">
-                  <th className="text-left py-4 px-4">Feature</th>
-                  <th className="text-center py-4 px-4">Free</th>
-                  <th className="text-center py-4 px-4 bg-purple-500/10">Premium</th>
-                  <th className="text-center py-4 px-4">Collector</th>
+                <tr className="border-b border-ink-subtle">
+                  <th className="text-left py-4 px-4 font-display text-ink-base">Feature</th>
+                  <th className="text-center py-4 px-4 font-display text-ink-base">Seeker</th>
+                  <th className="text-center py-4 px-4 bg-crimson/5 font-display text-ink-base">Adept</th>
+                  <th className="text-center py-4 px-4 font-display text-ink-base">Collector</th>
                 </tr>
               </thead>
               <tbody>
@@ -216,17 +212,17 @@ const PricingPage: React.FC = () => {
                   ['Offline App', '-', '-', '✓'],
                   ['Monthly Q&A', '-', '-', '✓'],
                 ].map((row, i) => (
-                  <tr key={i} className="border-b border-white/5">
-                    <td className="py-4 px-4 text-gray-300">{row[0]}</td>
-                    <td className="py-4 px-4 text-center text-gray-400">{row[1]}</td>
-                    <td className="py-4 px-4 text-center bg-purple-500/5">
-                      <span className={row[2] === '✓' ? 'text-purple-400' : 'text-white'}>
+                  <tr key={i} className="border-b border-ink-subtle/50">
+                    <td className="py-4 px-4 text-ink-muted font-serif">{row[0]}</td>
+                    <td className="py-4 px-4 text-center text-ink-muted font-serif">{row[1]}</td>
+                    <td className="py-4 px-4 text-center bg-crimson/5">
+                      <span className={row[2] === '✓' ? 'text-gold' : 'text-ink-base font-semibold'}>
                         {row[2]}
                       </span>
                     </td>
-                    <td className="py-4 px-4 text-center text-gray-400">
+                    <td className="py-4 px-4 text-center text-ink-muted font-serif">
                       {row[3] === '✓' ? (
-                        <Check className="w-5 h-5 text-green-400 mx-auto" />
+                        <Check className="w-5 h-5 text-gold mx-auto" />
                       ) : (
                         row[3]
                       )}
@@ -241,15 +237,15 @@ const PricingPage: React.FC = () => {
         {/* Testimonials */}
         <div className="grid md:grid-cols-2 gap-6 mb-16">
           {testimonials.map((testimonial, i) => (
-            <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-6">
-              <p className="text-gray-300 italic mb-4">"{testimonial.quote}"</p>
+            <div key={i} className="card-parchment p-6">
+              <p className="text-ink-muted italic mb-4 font-serif">"{testimonial.quote}"</p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center font-bold">
+                <div className="w-10 h-10 bg-crimson/10 border border-crimson/20 rounded-full flex items-center justify-center font-bold text-crimson">
                   {testimonial.author[0]}
                 </div>
                 <div>
-                  <div className="font-semibold">{testimonial.author}</div>
-                  <div className="text-sm text-gray-400">{testimonial.role}</div>
+                  <div className="font-semibold text-ink-base">{testimonial.author}</div>
+                  <div className="text-sm text-ink-muted">{testimonial.role}</div>
                 </div>
               </div>
             </div>
@@ -258,24 +254,24 @@ const PricingPage: React.FC = () => {
 
         {/* FAQ */}
         <div className="max-w-3xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold text-center mb-8">Frequently Asked Questions</h2>
+          <h2 className="text-2xl font-display font-bold text-center mb-8 text-ink-base">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-6">
-                <h3 className="font-semibold mb-2">{faq.question}</h3>
-                <p className="text-gray-400 text-sm">{faq.answer}</p>
+              <div key={i} className="card-parchment p-6">
+                <h3 className="font-display font-semibold mb-2 text-ink-base">{faq.question}</h3>
+                <p className="text-ink-muted text-sm font-serif">{faq.answer}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Money Back Guarantee */}
-        <div className="max-w-3xl mx-auto text-center bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/20 rounded-2xl p-8">
-          <div className="w-16 h-16 bg-green-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <Shield className="w-8 h-8 text-green-400" />
+        <div className="max-w-3xl mx-auto text-center card-parchment p-8">
+          <div className="w-16 h-16 bg-green-500/10 border border-green-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+            <Shield className="w-8 h-8 text-green-600" />
           </div>
-          <h3 className="text-xl font-bold mb-2">30-Day Money-Back Guarantee</h3>
-          <p className="text-gray-400">
+          <h3 className="text-xl font-display font-bold mb-2 text-ink-base">30-Day Money-Back Guarantee</h3>
+          <p className="text-ink-muted font-serif">
             Try GhostingLeik Premium risk-free. If you're not completely satisfied within 30 days, we'll refund your subscription—no questions asked.
           </p>
         </div>
