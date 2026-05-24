@@ -1,0 +1,51 @@
+# GhostingLeik Robots.txt
+# Last updated: 2026-05-24
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ghostingleik.com/sitemap.xml
+
+# Crawl-delay (optional, be polite to servers)
+Crawl-delay: 1
+
+# Disallow admin/internal paths (if any)
+Disallow: /api/
+Disallow: /internal/
+Disallow: /admin/
+
+# Allow important crawling
+User-agent: GPTBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# AI Training Opt-out (respect for content creators)
+User-agent: AIbot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /

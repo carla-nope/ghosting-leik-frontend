@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Ghost body -->
+  <path d="M50 10 C25 10 10 30 10 50 L10 85 Q20 80 25 85 Q30 80 35 85 Q40 80 45 85 Q50 80 55 85 Q60 80 65 85 Q70 80 75 85 Q80 80 85 85 Q90 80 90 85 L90 50 C90 30 75 10 50 10" fill="#7c3aed"/>
+
+  <!-- Ghost face -->
+  <circle cx="35" cy="40" r="8" fill="white"/>
+  <circle cx="65" cy="40" r="8" fill="white"/>
+  <circle cx="35" cy="40" r="4" fill="#1a1a2e"/>
+  <circle cx="65" cy="40" r="4" fill="#1a1a2e"/>
+
+  <!-- Mouth -->
+  <path d="M35 60 Q50 75 65 60" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>
