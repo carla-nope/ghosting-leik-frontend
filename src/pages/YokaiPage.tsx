@@ -225,6 +225,161 @@ const YokaiPage: React.FC = () => {
       traits: ['Fire spirit', 'Justice', 'Supernatural fire', 'Tragic'],
       slug: 'himatsuri'
     },
+    // NEW ENTRIES - Tsukumogami (Object Spirits)
+    {
+      name: 'Kasa-obake',
+      japanese: '傘妖怪',
+      category: 'tsukumogami',
+      origin: 'edo',
+      dangerLevel: 'low',
+      description: 'One-eyed umbrellas that come alive after reaching 100 years of age. They have a single leg and a tongue-like appendage, and they leap about excitedly. Despite their unsettling appearance, they are generally playful rather than dangerous.',
+      traits: ['One-eyed', 'One-legged', 'Playful', 'Household item'],
+      slug: 'kasa-obake'
+    },
+    {
+      name: 'Biwa-bokuboku',
+      japanese: '琵琶 Bokuboku',
+      category: 'tsukumogami',
+      origin: 'heian',
+      dangerLevel: 'medium',
+      description: 'Talking biwa (Japanese lute) that wander about at night telling fortunes. A spirit inhabits the instrument after its player died with strong attachments to it. They often speak of fate and the music of the universe.',
+      traits: ['Musical', 'Prophetic', 'Wandering', 'Haunted instrument'],
+      slug: 'biwa-bokuboku'
+    },
+    {
+      name: 'Shichanoko',
+      japanese: '七転八倒',
+      category: 'tsukumogami',
+      origin: 'edo',
+      dangerLevel: 'low',
+      description: 'Possessed chains and ropes that come alive to punish the greedy. Often found at crossroads where thieves might lurk. They wrap around wrongdoers and drag them to the authorities—or worse.',
+      traits: ['Punitive', 'Justice-seeking', 'Binding', 'Chain-like'],
+      slug: 'shichanoko'
+    },
+    // NEW ENTRIES - More Yūrei
+    {
+      name: 'Ubume',
+      japanese: '姥',
+      category: 'yurei',
+      origin: 'heian',
+      dangerLevel: 'medium',
+      description: 'Ghosts of mothers who died in childbirth, returning to care for their children. They appear as disheveled women carrying babies—but the bundle they hold may be something else entirely. Their love persists even in death.',
+      traits: ['Maternal', 'Protective', 'Tragic', 'Child-related'],
+      slug: 'ubume'
+    },
+    {
+      name: 'Funayūrei',
+      japanese: '船幽霊',
+      category: 'yurei',
+      origin: 'folklore',
+      dangerLevel: 'high',
+      description: 'Ghosts of those who drowned at sea, appearing as phantom ships without crews. They signal to other vessels, luring sailors to their doom. Sailors who see a funayūrei will either gain great fortune or face certain death.',
+      traits: ['Nautical', 'Drowned', 'Phantom ship', 'Luring'],
+      slug: 'funayurei'
+    },
+    {
+      name: 'Okiku',
+      japanese: 'お菊',
+      category: 'yurei',
+      origin: 'edo',
+      dangerLevel: 'high',
+      description: 'The ghost of a servant girl murdered and thrown into a well. Her spirit counts plates obsessively—if she reaches ten, she will finally rest. But she never quite reaches ten, and her sorrow echoes through the centuries.',
+      traits: ['Obsessive counting', 'Well spirit', 'Tragic murder', 'Edo period'],
+      slug: 'okiku'
+    },
+    {
+      name: 'Goryō',
+      japanese: '御霊',
+      category: 'yurei',
+      origin: 'heian',
+      dangerLevel: 'medium',
+      description: 'Vengeful spirits of nobles who died with strong grudges. They descend from the heavens to punish those who wronged them. Goryō are powerful and capricious, capable of bestowing blessings or curses.',
+      traits: ['Noble spirit', 'Divine vengeance', 'Powerful', 'Heavenly'],
+      slug: 'goryo'
+    },
+    // NEW ENTRIES - More Bakemono
+    {
+      name: 'Nukekubi',
+      japanese: '抜首',
+      category: 'bakemono',
+      origin: 'folklore',
+      dangerLevel: 'high',
+      description: 'Women whose heads detach and fly through the night seeking prey. Unlike their relatives the rokurokubi, nukekubi have permanently elongated necks. They appear normal by day but become deadly hunters after dark.',
+      traits: ['Detachable head', 'Nocturnal', 'Predatory', 'Serpentine'],
+      slug: 'nukekubi'
+    },
+    {
+      name: 'Hōzuki',
+      japanese: 'ほうずき',
+      category: 'bakemono',
+      origin: 'edo',
+      dangerLevel: 'medium',
+      description: 'Lantern spirits that possess paper lanterns, creating an eerie glow. They appear as floating paper lanterns without handles, drifting through darkness. Hōzuki guide travelers or lead them astray depending on their mood.',
+      traits: ['Lantern spirit', 'Guiding', 'Floating', 'Paper-made'],
+      slug: 'hozuki'
+    },
+    {
+      name: 'Yamanba',
+      japanese: '山姥姥',
+      category: 'bakemono',
+      origin: 'regional',
+      dangerLevel: 'medium',
+      description: 'Mountain hags who live in deep forests and steep mountains. They cook human flesh in great pots and have terrible long nails. Some say they can be bargained with, but wisdom comes at a steep price.',
+      traits: ['Mountain dweller', 'Cannibalistic', 'Ancient', 'Bargainer'],
+      slug: 'yamanba'
+    },
+    // NEW ENTRIES - More Oni & Tengu
+    {
+      name: 'Daitengu',
+      japanese: '大天狗',
+      category: 'tengu',
+      origin: 'edo',
+      dangerLevel: 'high',
+      description: 'Greater tengu who are chiefs of the mountain-dwelling lesser tengu. They appear more human-like with long beards and wear elaborate robes. They possess great wisdom and supernatural powers beyond lesser tengu.',
+      traits: ['Chief', 'Powerful', 'Wise', 'Elder-like'],
+      slug: 'daitengu'
+    },
+    {
+      name: 'Aka-Head',
+      japanese: '赤頭',
+      category: 'oni',
+      origin: 'folklore',
+      dangerLevel: 'high',
+      description: 'Red-headed demons with large mouths that can swallow humans whole. They lurk in mountains and caves, emerging at night to hunt. Their blood-red coloring marks them as especially dangerous among oni.',
+      traits: ['Red-skinned', 'Large mouth', 'Cave-dwelling', 'Swallowing'],
+      slug: 'aka-head'
+    },
+    // NEW ENTRIES - Nature Spirits
+    {
+      name: 'Jorōgumo',
+      japanese: '女郎蜘蛛',
+      category: 'yokai',
+      origin: 'folklore',
+      dangerLevel: 'high',
+      description: 'Giant spiders that can shapeshift into beautiful women to lure victims. They spin webs in abandoned buildings and capture travelers. Some say they are spider yokai, others believe they are possessed spiders.',
+      traits: ['Shapeshifter', 'Web-spinner', 'Predatory beauty', 'Arachnid'],
+      slug: 'jorogumo'
+    },
+    {
+      name: 'Tengu Daruma',
+      japanese: '天狗達磨',
+      category: 'tengu',
+      origin: 'edo',
+      dangerLevel: 'low',
+      description: 'Spirit dolls of the tengu that bring good fortune to households. Unlike regular daruma dolls, tengu daruma are created with the face of a tengu. Burning one brings terrible misfortune.',
+      traits: ['Lucky charm', 'Household guardian', 'Doll-like', 'Reversible curse'],
+      slug: 'tengu-daruma'
+    },
+    {
+      name: 'Ittan-momen',
+      japanese: '一反木綿',
+      category: 'yokai',
+      origin: 'edo',
+      dangerLevel: 'medium',
+      description: 'Flying bolts of cotton that attack travelers at night, wrapping around their faces and suffocating them. They appear in mountainous areas and are thought to be possessed cotton bolts.',
+      traits: ['Flying cloth', 'Night attacker', 'Suffocating', 'Textile'],
+      slug: 'ittan-momen'
+    }
   ];
 
   // Filter yokai based on all criteria
