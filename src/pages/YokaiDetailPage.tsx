@@ -1,46 +1,34 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
-  ArrowLeft, Heart, Share2, Bookmark, Clock, Star,
-  ChevronRight, Globe, MapPin, AlertTriangle, BookOpen, Scroll
+  ArrowLeft, Heart, Share2, Bookmark, ChevronRight, Globe, MapPin, AlertTriangle
 } from 'lucide-react';
+import { getYokaiBySlug } from '../data/yokaiData';
 
 const YokaiDetailPage: React.FC = () => {
   const { slug } = useParams();
+  const yokai = slug ? getYokaiBySlug(slug) : undefined;
 
-  const yokai = {
-    name: 'Kitsune',
-    japanese: '狐',
-    category: 'Bakemono',
-    dangerLevel: 'Medium',
-    origin: 'Japanese Folklore',
-    description: 'Kitsune (狐) are intelligent fox spirits with the ability to shapeshift into human form. They are among the most famous and beloved yōkai in Japanese folklore.',
-    appearance: 'Kitsune can appear as beautiful women, young men, or elderly scholars. When not in human form, they appear as ordinary foxes, but with supernatural insight. Some tales describe kitsune with multiple tails—the more tails a kitsune has, the more powerful it is. A nine-tailed kitsune is considered nearly divine.',
-    abilities: [
-      'Shapeshifting – Can transform into any human form perfectly',
-      'Fox Fire – Can create ethereal flames that appear in various colors',
-      'Possession – Can possess humans through their breath or food',
-      'Illusion Creation – Masters of deception and misdirection',
-      'Longevity – Can live for hundreds or even thousands of years'
-    ],
-    personality: 'Kitsune personalities vary widely. Some are mischievous tricksters who enjoy playing pranks on humans. Others are wise and benevolent, serving as guardians of certain places or people. The most powerful kitsune are often associated with Inari, the Shinto deity of rice and fertility.',
-    story: 'There are countless kitsune stories, but one of the most famous is the tale of Genno, a kitsune who fell in love with a Buddhist monk named Myōren. Despite their different natures, they formed a deep bond that transcended the boundary between human and yōkai. When Myōren was attacked by jealous priests, Genno appeared in dreams to protect him, eventually using her supernatural powers to save his life. The story reminds us that love can bridge even the widest divides.',
-    relatedYokai: [
-      { name: 'Kappa', slug: 'kappa', emoji: '🐸' },
-      { name: 'Tanuki', slug: 'tanuki', emoji: '🦝' },
-      { name: 'Yūrei', slug: 'yurei', emoji: '👻' }
-    ],
-    mediaAppearances: [
-      'Spirited Away (Chihiro)',
-      'Pokemon (multiple fox-like creatures)',
-      'Okami (video game)',
-      'Naruto (multiple characters)'
-    ]
-  };
+  if (!yokai) {
+    return (
+      <div className="min-h-screen py-12">
+        <div className="container mx-auto px-4 max-w-4xl text-center">
+          <div className="card-archive p-12">
+            <div className="text-6xl mb-4">👻</div>
+            <h1 className="text-2xl font-display font-bold text-ink-base mb-4">Yōkai Not Found</h1>
+            <p className="text-ink-muted mb-6 font-serif">This spirit has not yet manifested in our encyclopedia.</p>
+            <Link to="/yokai" className="btn-primary inline-flex items-center gap-2">
+              <ArrowLeft className="w-4 h-4" />
+              Return to Encyclopedia
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const getDangerColor = (level: string) => {
     switch (level) {
-      case 'None': return 'text-green-600 bg-green-50 border border-green-200';
       case 'Low': return 'text-blue-600 bg-blue-50 border border-blue-200';
       case 'Medium': return 'text-amber-600 bg-amber-50 border border-amber-200';
       case 'High': return 'text-orange-600 bg-orange-50 border border-orange-200';
@@ -74,7 +62,7 @@ const YokaiDetailPage: React.FC = () => {
               </span>
             </div>
             <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 text-ink-base">{yokai.name}</h1>
-            <div className="flex items-center justify-center gap-4 text-sm">
+            <div className="flex items-center justify-center gap-4 text-sm flex-wrap">
               <span className={`px-3 py-1 rounded-full ${getDangerColor(yokai.dangerLevel)}`}>
                 <AlertTriangle className="w-4 h-4 inline mr-1" />
                 {yokai.dangerLevel} Danger
@@ -83,6 +71,12 @@ const YokaiDetailPage: React.FC = () => {
                 <Globe className="w-4 h-4" />
                 {yokai.origin}
               </span>
+              {yokai.habitat && (
+                <span className="flex items-center gap-1 text-ink-muted">
+                  <MapPin className="w-4 h-4" />
+                  {yokai.habitat}
+                </span>
+              )}
             </div>
           </div>
 
@@ -143,42 +137,67 @@ const YokaiDetailPage: React.FC = () => {
 
             {/* Story */}
             <div className="bg-gradient-to-br from-crimson/5 to-gold/5 border border-crimson/20 rounded-xl p-6">
-              <h2 className="text-xl font-display font-bold mb-4 text-ink-base">Famous Story</h2>
+              <h2 className="text-xl font-display font-bold mb-4 text-ink-base">Famous Tale</h2>
               <p className="text-ink-muted leading-relaxed italic font-serif">{yokai.story}</p>
             </div>
 
-            {/* Media Appearances */}
-            <div>
-              <h2 className="text-xl font-display font-bold mb-4 text-ink-base">In Popular Culture</h2>
-              <div className="flex flex-wrap gap-2">
-                {yokai.mediaAppearances.map((media, i) => (
-                  <span key={i} className="px-4 py-2 bg-parchment-alt border border-ink-subtle rounded-full text-sm text-ink-muted font-serif">
-                    {media}
-                  </span>
-                ))}
+            {/* Folklore Origins */}
+            {yokai.folkloreOrigins && (
+              <div className="bg-parchment-alt border border-ink-subtle rounded-lg p-6">
+                <h2 className="text-xl font-display font-bold mb-4 text-ink-base">Folklore & Origins</h2>
+                <p className="text-ink-muted leading-relaxed font-serif">{yokai.folkloreOrigins}</p>
               </div>
-            </div>
+            )}
+
+            {/* Countermeasures */}
+            {yokai.countermeasures && yokai.countermeasures.length > 0 && (
+              <div>
+                <h2 className="text-xl font-display font-bold mb-4 text-ink-base">Protection & Countermeasures</h2>
+                <div className="flex flex-wrap gap-2">
+                  {yokai.countermeasures.map((cm, i) => (
+                    <span key={i} className="px-4 py-2 bg-gold/10 border border-gold/30 text-gold-dark rounded-full text-sm font-serif">
+                      {cm}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Media Appearances */}
+            {yokai.mediaAppearances && yokai.mediaAppearances.length > 0 && (
+              <div>
+                <h2 className="text-xl font-display font-bold mb-4 text-ink-base">In Popular Culture</h2>
+                <div className="flex flex-wrap gap-2">
+                  {yokai.mediaAppearances.map((media, i) => (
+                    <span key={i} className="px-4 py-2 bg-parchment-alt border border-ink-subtle rounded-full text-sm text-ink-muted font-serif">
+                      {media}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </article>
 
         {/* Related Yōkai */}
-        <div className="mt-12">
-          <h2 className="text-2xl font-display font-bold mb-6 text-ink-base">Related Yōkai</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {yokai.relatedYokai.map((related, i) => (
-              <Link
-                key={i}
-                to={`/yokai/${related.slug}`}
-                className="group card-archive p-6 text-center hover:border-crimson/30 transition-all"
-              >
-                <div className="text-5xl mb-3">{related.emoji}</div>
-                <h3 className="font-display font-bold text-ink-base group-hover:text-crimson transition-colors">
-                  {related.name}
-                </h3>
-              </Link>
-            ))}
+        {yokai.relatedYokai && yokai.relatedYokai.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-2xl font-display font-bold mb-6 text-ink-base">Related Yōkai</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              {yokai.relatedYokai.map((related, i) => (
+                <Link
+                  key={i}
+                  to={`/yokai/${related.slug}`}
+                  className="group card-archive p-6 text-center hover:border-crimson/30 transition-all"
+                >
+                  <h3 className="font-display font-bold text-ink-base group-hover:text-crimson transition-colors">
+                    {related.name}
+                  </h3>
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Quiz CTA */}
         <div className="mt-12 text-center card-parchment p-8">
