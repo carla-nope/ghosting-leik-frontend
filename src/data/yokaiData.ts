@@ -246,6 +246,270 @@ export const yokaiData: Record<string, Yokai> = {
     folkloreOrigins: 'Yūrei beliefs derive from the Shinto concept that spirits must be properly tended after death. Untimely deaths, violent deaths, or those with unfinished business are believed to become yūrei. Buddhist concepts of karma and the cycle of rebirth add layers to understanding why spirits linger.',
     habitat: 'Places of their death, former homes, locations with strong emotional significance',
     countermeasures: ['Respect the dead and memorial practices', 'Do not die with unfinished business', 'Proper funeral rites must be observed', 'Consult priests or shamans for troubled spirits']
+  },
+
+  'tanuki': {
+    name: 'Tanuki',
+    japanese: '狸',
+    category: 'Bakemono',
+    dangerLevel: 'Low',
+    origin: 'Japanese Folklore',
+    description: 'Tanuki are mischievous raccoon dogs famous for their shapeshifting abilities and playful trickster nature. Unlike kitsune who transform with elegance, tanuki transformations are often comically imperfect—a leaf might appear where an ear should be, or a tail might peek out from a disguise.',
+    appearance: 'Tanuki appear as large, rotund raccoon dogs with fluffy tails and expressive faces. When in human form, they often appear as monks, laborers, or travelers—but usually with some telltale animal feature remaining, such as very small eyes, a pot belly, or unusual footwear. They carry magical leaves on their heads that help them transform.',
+    abilities: [
+      'Shapeshifting – Can transform into humans, but often imperfectly',
+      'Leaf Magic – Leaves on their head aid transformation',
+      'Storytelling – Can spin elaborate tales to trick humans',
+      'Expansion – Can make their belly grow to enormous sizes',
+      'Shadow duplication – Can create multiple copies of themselves'
+    ],
+    personality: 'Tanuki are the comedians of the yōkai world—gentle tricksters who prefer harmless pranks to genuine harm. They enjoy sake, food, and good company. Their transformations often fail because they get distracted by food or drink. Despite their mischievousness, tanuki are essentially kind-hearted and will help those in need if properly thanked.',
+    story: 'A poor woodcutter once found a tanuki in his trap. Feeling pity, he released it. That night, a tanuki in monk\'s robes visited his home and performed a dance that left gold coins in its wake. The woodcutter and his family lived well for months—until a merchant arrived, claiming the tanuki dance was his lost performance. The tanuki appeared and admitted it had borrowed the merchant\'s act. Rather than fighting, the two became friends, and the tanuki promised to teach the merchant new dances. Sometimes, the woodcutter still hears laughter in the forest at night.',
+    relatedYokai: [
+      { name: 'Kitsune', slug: 'kitsune' },
+      { name: 'Kappa', slug: 'kappa' },
+      { name: 'Hōzuki', slug: 'hozuki' }
+    ],
+    mediaAppearances: [
+      'Puss in Boots (Shrek)',
+      'Pom Poko (film)',
+      'Okami (video game)',
+      'Various Studio Ghibli references'
+    ],
+    folkloreOrigins: 'Tanuki have been part of Japanese folklore since the Heian period. They were depicted in the oldest surviving yōkai scroll, the "Hōjōki" texts mention them, and they became particularly popular in Edo period popular culture as comic figures.',
+    habitat: 'Forests, mountains, rural villages, anywhere with food and sake',
+    countermeasures: ['Leave offerings of sake', 'Share food when encountered', 'Do not set traps for them', 'They respond to kindness']
+  },
+
+  'nukekubi': {
+    name: 'Nukekubi',
+    japanese: '抜首',
+    category: 'Bakemono',
+    dangerLevel: 'High',
+    origin: 'Japanese Folklore',
+    description: 'Nukekubi are women whose heads detach and fly through the night seeking prey. Unlike their relatives the rokurokubi, whose necks stretch gradually, nukekubi have permanently separated heads that float freely through the darkness.',
+    appearance: 'By day, nukekubi appear as normal women—often beautiful, elegant, and seemingly innocent. At night, their heads detach with a soft popping sound, revealing elongated necks like snakes. Their detached heads fly through darkness, their hair flowing behind them like a dark cloak, hunting for blood and flesh. Some accounts say they retain their beauty even in true form, others describe them as terrifying with long fangs.',
+    abilities: [
+      'Head Detachment – Their head separates completely at night',
+      'Flight – Detached heads can fly through the air',
+      'Night Vision – Enhanced sight in darkness',
+      'Blood Detection – Can sense the blood of living creatures',
+      'Neck Extension – Their necks can stretch to great lengths before detaching'
+    ],
+    personality: 'Nukekubi lead double lives, often serving as devoted wives, dutiful daughters, or hardworking servants by day. By night, their true nature emerges—predatory and bloodthirsty. Some nukekubi struggle with their dual nature, loving their families but unable to resist the hunger. Others embrace their darkness fully. All are tragic figures, cursed by circumstances beyond their control.',
+    story: 'A young bride in the mountains seemed perfect—beautiful, dutiful, and beloved. But every morning, her husband noticed she seemed exhausted, and servants vanished without trace. One night, her husband hid in the rafters and watched. When the moon rose, the woman\'s head floated away, leaving a headless body behind. The head returned before dawn, reattaching itself as if nothing had happened. When confronted, the nukekubi wept. She had been cursed by her first husband, who she had murdered. Only death could free her. The husband, after long consideration, freed her with his sword. Her headless body held him that night, thanking him, before she dissolved into moonlight.',
+    relatedYokai: [
+      { name: 'Jorōgumo', slug: 'jorogumo' },
+      { name: 'Yamanba', slug: 'yamanba' },
+      { name: 'Yūrei', slug: 'yurei' }
+    ],
+    mediaAppearances: [
+      'Kwaidan (film)',
+      'Various horror manga',
+      'GeGeGe no Kitarō (anime)',
+      'Nioh (video game)'
+    ],
+    folkloreOrigins: 'Nukekubi legends may have originated from descriptions of sleep disorders, where people\'s eyes remained open and glassy, or from observations of certain snake species that move with snake-like necks. The duality of good and evil within one person reflects Buddhist concepts of the shadow self.',
+    habitat: 'Villages, mountain homes, anywhere a woman might live secretly',
+    countermeasures: ['Sleep in groups', 'Keep lights burning at night', 'Do not marry strangers', 'Watch for signs of exhaustion without cause']
+  },
+
+  'ubume': {
+    name: 'Ubume',
+    japanese: '姥',
+    category: 'Yūrei',
+    dangerLevel: 'Medium',
+    origin: 'Heian Period',
+    description: 'Ubume are ghosts of mothers who died in childbirth, returning to care for their children. They carry bundles that may contain either their living children or something far more unsettling. Their maternal love persists even beyond death, making them protective rather than malicious.',
+    appearance: 'Ubume appear as weary women in dirty, bloodstained robes, carrying heavy bundles on their backs. They approach houses where children live alone or neglected. Some ubume carry their living children, who they rear even in death. Others carry bundles that, when examined, might contain stones or monsters. Their faces are often described as both loving and exhausted.',
+    abilities: [
+      'Mother\'s Intuition – Can find children anywhere',
+      'Bundle Magic – Their bundles contain supernatural power',
+      'Protective Presence – Can shield children from harm',
+      'Emotional Drain – Sapping the life force of those who threaten children',
+      'Night Movement – Only appear in darkness'
+    ],
+    personality: 'Ubume are driven by maternal love that transcends death. They seek out orphaned, neglected, or abandoned children, becoming ghost-mothers who care for them. While some stories portray ubume as genuinely protective spirits, others warn that their devotion can become consuming—they may steal children away from living mothers, or their bundles may contain something other than comfort. All share infinite sorrow at being unable to raise their children in life.',
+    story: 'A young mother died in childbirth, leaving behind a crying infant. The husband, unable to care for the child alone, hired a wet nurse but struggled with grief. On moonless nights, a woman would appear at the window—his dead wife, whose spirit could not move on. She would enter, tend the baby, and nurse it with ghostly milk. When dawn came, she vanished. The husband learned to leave the window unlatched, and for years, the baby thrived while the mother watched over them. Eventually, he remarried and found new love. On the last night the ghost came, she simply stood at the window, watching, then bowed once and disappeared. The baby never remembered her, but the father never forgot.',
+    relatedYokai: [
+      { name: 'Okiku', slug: 'okiku' },
+      { name: 'Yūrei', slug: 'yurei' },
+      { name: 'Goryō', slug: 'goryo' }
+    ],
+    mediaAppearances: [
+      'Various Japanese horror films',
+      'Kaidan Restaurant (anime)',
+      'Horror game adaptations',
+      'Yōkai Watch'
+    ],
+    folkloreOrigins: 'Ubume emerge from the tragic circumstances of women who died during or after childbirth—a common occurrence in historical Japan. The bundles they carry represent the heavy burden of motherhood that continues even after death. The distinction between protective and predatory ubume may reflect different regional beliefs or the specific circumstances of each ghost.',
+    habitat: 'Near homes with children, particularly orphaned or neglected ones',
+    countermeasures: ['Care for all children properly', 'Honor mothers who died in childbirth', 'Do not interfere with ubume and their children', 'Leave offerings for the spirits of dead mothers']
+  },
+
+  'hozuki': {
+    name: 'Hōzuki',
+    japanese: 'ほうずき',
+    category: 'Bakemono',
+    dangerLevel: 'Medium',
+    origin: 'Edo Period',
+    description: 'Hōzuki are lantern spirits that possess paper lanterns, creating an eerie glow that guides travelers or leads them astray. They appear as floating paper lanterns without handles, drifting through darkness. Unlike dangerous yōkai, hōzuki are often misunderstood wanderers.',
+    appearance: 'Hōzuki appear as traditional Japanese paper lanterns, but without handles—they float in the air at eye level. The light they emit is often a soft, inviting glow that can be seen from great distances. Some accounts describe small creatures inside the lanterns, barely visible, that control the floating flames. They appear most commonly on foggy nights or in deep forests.',
+    abilities: [
+      'Guided Light – Can lead people through darkness',
+      'Floating – Can drift through the air without support',
+      'Illumination – Their light reveals hidden things',
+      'Luring – Can draw people deeper into forests',
+      'Lantern Possession – Can inhabit any paper lantern'
+    ],
+    personality: 'Hōzuki have mercurial temperaments—they might help one traveler and lead another astray for no apparent reason. Some believe they are testing the nature of those they encounter, while others say their decisions are random. They enjoy playing pranks but rarely cause serious harm. A hōzuki that has guided many travelers becomes wise and benevolent; one that has led many to doom becomes malevolent.',
+    story: 'A traveling monk lost his way in a vast forest as night fell. A small lantern appeared before him, floating gently, and began to drift forward. He followed it for hours, through paths he had never seen. When he emerged from the forest at dawn, he found himself at the gates of a famous temple. The lantern floated once around him, then disappeared into thin air. He entered the temple and became its most devoted monk, telling all who visited about the lantern that had saved him. Years later, he heard of another traveler who had followed a lantern into the same forest and never returned. The same light, it seemed, guided some and devoured others.',
+    relatedYokai: [
+      { name: 'Kasa-obake', slug: 'kasa-obake' },
+      { name: 'Biwa-bokuboku', slug: 'biwa-bokuboku' },
+      { name: 'Hitodama', slug: 'hitodama' }
+    ],
+    mediaAppearances: [
+      'Natsume\'s Book of Friends',
+      'Various yōkai media',
+      'Video game adaptations',
+      'Children\'s folktales'
+    ],
+    folkloreOrigins: 'Hōzuki likely originated from the will-o\'-the-wisp phenomenon combined with Japanese beliefs about lantern spirits. They became popular in the Edo period when paper lanterns became common. The dual nature of guiding and leading astray reflects the Buddhist concept that spirits are neither good nor evil, but respond to the intentions they encounter.',
+    habitat: 'Forests, mountain paths, places where travelers might get lost, near ancient shrines',
+    countermeasures: ['Carry your own light source', 'Thank any lantern that helps you', 'Do not follow lights blindly', 'Offer respect to wandering spirits']
+  },
+
+  'yamanba': {
+    name: 'Yamanba',
+    japanese: '山姥姥',
+    category: 'Bakemono',
+    dangerLevel: 'Medium',
+    origin: 'Regional',
+    description: 'Yamanba are mountain hags who live in deep forests and steep mountains. They cook human flesh in great pots and have terrible long nails. Despite their fearsome reputation, some tales portray them as wisdom-bearers who can be bargained with, though the price is always steep.',
+    appearance: 'Yamanba appear as ancient crones with wild, tangled hair, long curved nails on both fingers and toes, and bodies wrapped in tattered cloth. They are often depicted with sagging skin and sunken eyes that nonetheless hold ancient wisdom. Some accounts describe them as once beautiful women who have lived so long in the mountains that they have become twisted. They often wear leaves in their hair and carry baskets for gathering.',
+    abilities: [
+      'Mountain Knowledge – Know every path in their domain',
+      'Cooking Magic – Their pots create supernatural stews',
+      'Transformation – Can appear as old women or beautiful maidens',
+      'Wisdom Transfer – Can share knowledge for a price',
+      'Claw Attacks – Their long nails can be deadly weapons'
+    ],
+    personality: 'Yamanba are neither purely evil nor benevolent—they are the embodiment of mountain wisdom, which is often harsh and uncompromising. They judge those who enter their domain, sometimes helping the worthy and sometimes devouring the foolish. Some yamanba have become guardians of secret places, serving as keepers of ancient knowledge. Their cooking, while often featuring human flesh in tales, can also be healing elixirs for those who earn their trust.',
+    story: 'A wandering samurai climbed a mountain seeking a master who could teach him the secret sword techniques. Instead, he found an old woman stirring a great pot. She offered him food. Suspicious, he asked what was cooking. "The same thing that happens to all who climb this mountain without purpose," she replied. He prepared to fight, but she simply laughed and added, "unless they are honest." He admitted his true purpose—to become stronger than his brother, who had humiliated him. The yamanba stirred the pot and said, "Your brother will always be stronger, unless you defeat him with something he cannot fight." She handed him a single drop of the stew. "Wisdom. Now go." He drank and descended, finding his brother waiting. He smiled, bowed, and walked away. His brother never understood why.',
+    relatedYokai: [
+      { name: 'Nukekubi', slug: 'nukekubi' },
+      { name: 'Jorōgumo', slug: 'jorogumo' },
+      { name: 'Daitengu', slug: 'daitengu' }
+    ],
+    mediaAppearances: [
+      'Princess Mononoke (film)',
+      'Various action games',
+      'Kabuki plays',
+      'Yōkai comics'
+    ],
+    folkloreOrigins: 'Yamanba may have originated from mountain goddesses who became corrupted over time, or from stories of abandoned elderly women in rural areas who survived by foraging in the mountains. The combination of nurturing and predatory imagery reflects the duality of nature—both life-giving and life-taking.',
+    habitat: 'Deep mountains, steep cliffs, remote forests',
+    countermeasures: ['Approach with respect', 'Tell the truth about your purpose', 'Do not steal from their pots', 'Ask for what you need clearly']
+  },
+
+  'biwa-bokuboku': {
+    name: 'Biwa-bokuboku',
+    japanese: '琵琶 Bokuboku',
+    category: 'Tsukumogami',
+    dangerLevel: 'Medium',
+    origin: 'Heian Period',
+    description: 'Biwa-bokuboku are haunted biwa (Japanese lute) instruments that walk about at night, speaking of fate and fortune. A spirit inhabits the instrument after its owner died with strong attachments to music. They wander the world, playing and prophesying.',
+    appearance: 'A biwa-bokuboku appears as a traditional Japanese biwa, but with small legs that allow it to walk. It moves by hopping or shuffling along, occasionally pausing to strum its strings. The sounds it produces are haunting, combining music with fragments of words—fortunes, warnings, and riddles. Some versions appear covered in dust and wear, others shine as if newly made.',
+    abilities: [
+      'Walking – The instrument can move on its own',
+      'Musical Prophecy – The music it plays tells the future',
+      'Speech – It can speak in riddles and prophecy',
+      'Haunting Sound – Its music draws listeners',
+      'Memory Reading – Can sense the history of those who hear it'
+    ],
+    personality: 'Biwa-bokuboku are melancholic spirits, bound to wander after their original owners died. They speak of fate because they understand it—they have seen beyond the veil. Their prophecies are rarely welcome, as they often speak of death, loss, or change that the listener cannot avoid. They bear their burden with quiet dignity, playing for anyone who will listen, searching for someone who might finally set them free.',
+    story: 'A blind musician played the biwa for the court, beloved by all. When he died, his biwa was placed in a temple storage. For years, monks heard strange music in the night—but when they searched, found only an old instrument in the corner. One night, a young musician heard the ghostly biwa playing in the temple garden. He followed the sound and found the instrument sitting alone, its strings vibrating without touch. "Play with me," the biwa said. "Your master loved you, but he is gone. Play for him." The young musician understood—he began to play, and together they created music that moved the spirits of the dead to rest. The biwa, finally unburdened, fell silent. But sometimes, on moonlit nights, you can still hear distant music in old temples.',
+    relatedYokai: [
+      { name: 'Kasa-obake', slug: 'kasa-obake' },
+      { name: 'Hōzuki', slug: 'hozuki' },
+      { name: 'Yūrei', slug: 'yurei' }
+    ],
+    mediaAppearances: [
+      'Various yōkai picture scrolls',
+      'Modern yōkai games',
+      'Anime adaptations',
+      'Historical literature'
+    ],
+    folkloreOrigins: 'Biwa-bokuboku originated during the Heian period when biwa musicians were common at court. When musicians died with unfinished compositions or unexpressed emotions, their attachment to the instrument created tsukumogami. The wandering and prophesying elements reflect beliefs about the power of music to reveal hidden truths.',
+    habitat: 'Temples, old homes, wherever music was once beloved, forests at night',
+    countermeasures: ['Play music with passion', 'Honor your instruments', 'Do not leave musical instruments unplayed', 'If you hear strange music at night, listen before you flee']
+  },
+
+  'funayurei': {
+    name: 'Funayūrei',
+    japanese: '船幽霊',
+    category: 'Yūrei',
+    dangerLevel: 'High',
+    origin: 'Japanese Folklore',
+    description: 'Funayūrei are ghosts of those who drowned at sea, appearing as phantom ships without crews. They signal to other vessels, luring sailors to their doom. Some say seeing a funayūrei brings either great fortune or certain death—there is no middle ground.',
+    appearance: 'Funayūrei appear as ghostly ships gliding silently across the water. They are often described as having tattered sails, broken masts, and decks covered in seaweed and sea creatures. Some say the ships glow with an eerie phosphorescence; others describe them as darker than the surrounding night, absorbing light rather than reflecting it. Sailors who board them find empty decks and phantom whispers.',
+    abilities: [
+      'Ship Manifestation – Appear as complete phantom vessels',
+      'Signal Lights – Can create lights to attract sailors',
+      'Fog Generation – Can create thick fog banks',
+      'Crew Summoning – Can call drowned sailors as crew',
+      'Ship Navigation – Know all sea routes, including dangerous ones'
+    ],
+    personality: 'Funayūrei are driven by the desperate longing of the drowned to find rest. They signal to passing ships because they hope each will contain someone who can help them—or someone who deserves to join them. Some funayūrei are vengeful, seeking to drown others as they drowned. Others are desperate pleas for help, trapped between worlds. All are bound by the sea, unable to leave until their story is complete.',
+    story: 'A captain\'s ship was caught in a storm and sank with all hands. The captain, who had died clinging to a piece of debris, found himself aboard a ghostly vessel—his own ship, but empty and silent. Other drowned sailors appeared, asking where they were going. He had no answer. For years, his phantom ship sailed the waters, signaling to passing vessels. Some ships followed and were destroyed. Others turned away and survived. A priest who encountered the funayūrei asked what they wanted. The captain replied, "We want to know if our families survived. We want to know if anyone remembered us." The priest promised to inquire. He spent the rest of his life visiting coastal villages, asking after families lost at sea, and returning to the water to report. Eventually, the captain nodded and his ship dissolved into morning mist.',
+    relatedYokai: [
+      { name: 'Yūrei', slug: 'yurei' },
+      { name: 'Onryō', slug: 'onryo' },
+      { name: 'Nure-onna', slug: 'nure-onna' }
+    ],
+    mediaAppearances: [
+      'Pirates of the Caribbean references',
+      'Japanese naval horror films',
+      'Yōkai games',
+      'Maritime folklore collections'
+    ],
+    folkloreOrigins: 'Funayūrei emerged from the tragic reality of sea disasters in Japanese history. The nation\'s reliance on fishing and trade meant that shipwrecks and drownings were common, and the spirits of those lost at sea became part of maritime folklore. The ambiguity of fortune versus doom reflects the unpredictable nature of the sea itself.',
+    habitat: 'Seas, oceans, particularly near shipwreck sites and during storms',
+    countermeasures: ['Do not follow phantom lights', 'Pray for drowned souls before voyages', 'Throw offerings overboard', 'If you see a ship without people, sail the other way']
+  },
+
+  'goryo': {
+    name: 'Goryō',
+    japanese: '御霊',
+    category: 'Yūrei',
+    dangerLevel: 'Medium',
+    origin: 'Heian Period',
+    description: 'Goryō are vengeful spirits of nobles who died with strong grudges, descending from the heavens to punish those who wronged them. They are powerful and capricious, capable of bestowing blessings or curses based on how they are treated.',
+    appearance: 'Goryō appear in noble attire—often wearing elaborate robes and caps, appearing as refined aristocrats even in death. Some manifests as terrifying figures with fierce expressions; others remain calm and regal. They are associated with celestial phenomena—appearing during eclipses, auroras, or other unusual sky events. Their presence is often accompanied by strange lights or music.',
+    abilities: [
+      'Heavenly Descent – Can come down from the celestial realm',
+      'Cursing Power – Can place powerful curses on offenders',
+      'Blessing Power – Can grant good fortune to those who honor them',
+      'Possession – Can possess humans, especially during rituals',
+      'Weather Control – Can influence atmospheric conditions'
+    ],
+    personality: 'Goryō are the aristocrats of the spirit world—their grudges are grand, their vengeance is proportionate, and their standards are exacting. They judge by the codes of the Heian court, which can seem alien to modern sensibilities. Honoring them brings rewards; insulting them brings destruction. They are not malicious for the sake of it—they simply cannot tolerate injustice, especially when it involves their former status. This makes them unpredictable: a genuine apology might move them, but an insincere one enrages them.',
+    story: 'A court noble was murdered by rivals who claimed he had plotted against the emperor. His name was erased from records, his family stripped of titles. His spirit, however, could not rest—his name had been slandered. For years, the rivals suffered misfortune—accidents, illnesses, the deaths of children. Eventually, a priest conducted a ceremony to appease the goryō. He read the noble\'s true story—how he had been framed, how the rivals had twisted truth. The goryō appeared, acknowledging the priest\'s honesty. "My name has been restored," it said, and ascended back to the heavens. The rivals, freed from the curse, confessed their crimes. The noble\'s descendants, found living in poverty, were restored to their rightful place.',
+    relatedYokai: [
+      { name: 'Yūrei', slug: 'yurei' },
+      { name: 'Onryō', slug: 'onryo' },
+      { name: 'Okiku', slug: 'okiku' }
+    ],
+    mediaAppearances: [
+      'Heian period dramas',
+      'Video games (Touhou series)',
+      'Anime (Natsume\'s Book of Friends)',
+      'Historical horror'
+    ],
+    folkloreOrigins: 'Goryō emerged from Heian period beliefs about the power of aristocratic spirits. When nobles were wronged—especially politically—they were believed to become dangerous spirits capable of affecting the living world. The connection to celestial phenomena reflects beliefs that the aristocratic dead remain connected to heavenly authority.',
+    habitat: 'Temples, courts, places of historical power, during celestial events',
+    countermeasures: ['Treat all people with fairness', 'Do not slander others', 'Honor the memory of the dead', 'Perform ceremonies for vengeful spirits']
   }
 };
 
